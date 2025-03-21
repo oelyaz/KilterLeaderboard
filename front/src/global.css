@@ -1,0 +1,105 @@
+/* Gruvbox Dark Theme */
+
+/* Background and text */
+html {
+    background-color: #282828;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: #282828;
+    color: #ebdbb2;
+    font-family: "Fira Code", monospace;
+    margin: 0;
+    padding: 0;
+    height: 93%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #fabd2f;
+}
+
+a {
+    color: #d79921;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Table Styling */
+table {
+    max-width: 40em;
+    margin: 0 auto;
+    border-collapse: collapse;
+    align-content: center;
+    background-color: #3c3836;
+    color: #ebdbb2;
+}
+
+th, td {
+    border: 1px solid #7c6f64;
+    width: max-content;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #504945;
+    color: #d79921;
+}
+
+td {
+    background-color: #3c3836;
+}
+
+/* Buttons */
+button {
+    background-color: #458588;
+    color: #ebdbb2;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #83a598;
+}
+
+/* Form Inputs */
+input, select, textarea {
+    background-color: #3c3836;
+    color: #ebdbb2;
+    border: 1px solid #7c6f64;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #d79921;
+}
+
+/* Links */
+.link {
+    color: #b8bb26;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+/* Other Styling */
+.header {
+    background-color: #3c3836;
+    padding: 20px;
+    color: #ebdbb2;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
