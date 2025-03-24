@@ -13,7 +13,6 @@ public class UserService implements IUserService{
     @Autowired
     private IUserRepository userRepository;
 
-
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
