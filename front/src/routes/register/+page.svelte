@@ -1,11 +1,8 @@
 <script lang="ts">
-    import Leaderboard from "$lib/Leaderboard.svelte";
     import Navbar from "$lib/Navbar.svelte"
     import "$lib/global.css"
 </script>
 
 <Navbar />
 
-<h1>Klieterboard</h1>
-
-<Leaderboard />
+<h2>Enter username to register!</h2>
