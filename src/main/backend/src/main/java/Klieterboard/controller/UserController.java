@@ -69,7 +69,7 @@ public class UserController {
      * @param user username of the user to be updated
      * @return a ResponseEntity
      */
-    @PutMapping("/{username}")
+    @PutMapping("/update")
     public ResponseEntity<User> updateUser(@RequestBody User user){
         User update = userService.findById(user.getId());
 
