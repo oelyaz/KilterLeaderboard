@@ -3,6 +3,7 @@
 
     type Climber = {
         name: string;
+        ascents: number;
         score: number;
     };
 
@@ -16,9 +17,9 @@
         } catch (error) {
             console.error(error);
             leaderboard = [
-                { name: "Test Player 1", score: 999 },
-                { name: "Test Player 2", score: 850 },
-                { name: "Test Player 3", score: 720 }
+                { name: "Test Player 1", ascents: 12, score: 999 },
+                { name: "Test Player 2", ascents: 2, score: 850 },
+                { name: "Test Player 3", ascents: 1400, score: 720 }
             ];
         }
     }
@@ -31,6 +32,7 @@
         <tr>
             <th>Rank</th>
             <th>Name</th>
+            <th>Ascents</th>
             <th>Score</th>
         </tr>
     </thead>
@@ -39,6 +41,7 @@
             <tr>
                 <td>{index+1}</td>
                 <td>{player.name}</td>
+                <td>{player.ascents}</td>
                 <td>{player.score}</td>
             </tr>
         {/each}

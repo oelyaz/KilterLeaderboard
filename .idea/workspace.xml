@@ -5,11 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="891bfa52-113e-4b88-b86f-8b716e33b7d8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.svelte" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/app.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/routes/about/+page.svelte" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/lib/Navbar.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/front/src/routes/register/+page.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/.svelte-kit/ambient.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/.svelte-kit/ambient.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/.svelte-kit/generated/client/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/.svelte-kit/generated/client/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/.svelte-kit/generated/server/internal.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/.svelte-kit/generated/server/internal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/.svelte-kit/types/route_meta_data.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/.svelte-kit/types/route_meta_data.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/.svelte-kit/types/src/routes/$types.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/front/.svelte-kit/types/src/routes/$types.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/lib/global.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/lib/Leaderboard.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/lib/Leaderboard.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/routes/+page.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/routes/+page.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +29,8 @@
         <option value="TypeScript File" />
         <option value="leaderboard" />
         <option value="CSS File" />
+        <option value="+page" />
+        <option value="Navbar" />
       </list>
     </option>
   </component>
@@ -58,7 +66,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "frontend",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -73,6 +81,7 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/front/src/lib" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -93,11 +102,23 @@
       <updated>1742297174750</updated>
       <workItem from="1742297176160" duration="4991000" />
       <workItem from="1742464280371" duration="2695000" />
-      <workItem from="1742478578040" duration="8287000" />
+      <workItem from="1742478578040" duration="9713000" />
+      <workItem from="1743108037827" duration="1480000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
