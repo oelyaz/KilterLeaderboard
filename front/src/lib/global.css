@@ -10,28 +10,36 @@ html {
 
 body {
     background-color: #282828;
-    color: #ebdbb2;
-    font-family: "Fira Code", monospace;
+    color: #928374;
+    font-family: "Fragile Bombers Attack", sans-serif;
     margin: 0;
     padding: 0;
     height: 93%;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: #fabd2f;
-    text-align: center;
-    font-family: Times New Roman, serif;
+    color: #b16286;
+    text-align: left;
+    padding-left: 0.5em;
+    font-family: "Fragile Bombers Attack", serif;
     font-size: 4rem;
     font-weight: 800;
 }
 
 a {
-    color: #d79921;
+    color: #d65d0e;
     text-decoration: none;
+    font-size: 1.4rem;
 }
 
 a:hover {
-    text-decoration: underline;
+    background-color: #444;
+}
+
+/* Navbar Styling */
+nav {
+    display: flex;
+    background-color: #282828;
 }
 
 /* Table Styling */
@@ -40,20 +48,24 @@ table {
     margin: 0 auto;
     border-collapse: collapse;
     align-content: center;
-    background-color: #3c3836;
+    background-color: #282828;
     color: #ebdbb2;
 }
 
+thead {
+    background-color: #282828 !important;
+}
+
 th, td {
-    border: 1px solid #7c6f64;
+    border: 1px solid #1d2021 !important;
     width: max-content;
     padding: 10px;
     text-align: left;
 }
 
 th {
-    background-color: #504945;
-    color: #d79921;
+    background-color: #1d2021 !important;
+    color: #d65d0e;
 }
 
 td {
@@ -65,13 +77,16 @@ button {
     background-color: #458588;
     color: #ebdbb2;
     border: none;
+    place-self: center;
     padding: 10px 20px;
+    height: max-content;
     cursor: pointer;
     border-radius: 5px;
+    font-size: 1.2rem;
 }
 
 button:hover {
-    background-color: #83a598;
+    background-color: #076678;
 }
 
 /* Form Inputs */

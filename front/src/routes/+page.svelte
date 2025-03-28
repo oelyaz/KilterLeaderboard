@@ -5,7 +5,4 @@
 </script>
 
 <Navbar />
-
-<h1>Klieterboard</h1>
-
 <Leaderboard />
