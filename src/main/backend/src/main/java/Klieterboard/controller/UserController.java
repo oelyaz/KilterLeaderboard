@@ -24,7 +24,7 @@ public class UserController {
     }
 
     /**
-     * Returns a list of all users
+     * Returns a list of all users.
      * @return a list of all users
      */
     @GetMapping("/all")
@@ -33,7 +33,7 @@ public class UserController {
     }
 
     /**
-     * Finds a user based on their username
+     * Finds a user based on their username.
      * @param username username of the requested user
      * @return the requested user
      */
@@ -43,8 +43,8 @@ public class UserController {
     }
 
     /**
-     * Finds a user based on their id
-     * @param id id of the requested user
+     * Finds a user based on their id.
+     * @param id id (not kilterId) of the requested user
      * @return the requested user
      */
     @GetMapping("/id/{id}")
@@ -53,19 +53,21 @@ public class UserController {
     }
 
     /**
-     * Creates a new user
+     * Creates a new user.
      * @param user user to be created
      * @return a ResponseEntity
      */
     @PostMapping("/create")
     public ResponseEntity<User> createUser(@RequestBody User user){
-        User newUser = new User(user.getUsername(), user.getScore());
+        User newUser = new User(user.getKilterId(),user.getUsername());
+//        newUser.setKilterId(user.getKilterId());
+//        newUser.setUsername(user.getUsername());
         userService.insertUser(newUser);
         return ResponseEntity.ok(newUser);
     }
 
     /**
-     * Updates a specified user
+     * Updates a specified user.
      * @param user username of the user to be updated
      * @return a ResponseEntity
      */
@@ -80,7 +82,7 @@ public class UserController {
     }
 
     /**
-     * Updates the score of a specified user
+     * Updates the score of a specified user.
      * @param username username of the user whose score is to be updated
      * @param score the new score
      * @return a ResponseEntity
@@ -95,7 +97,7 @@ public class UserController {
     }
 
     /**
-     * Deletes a user in the database based on the user username
+     * Deletes a user in the database based on the user username.
      * @param username username of the user to be deleted
      * @return a ResponseEntity
      */

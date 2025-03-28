@@ -8,22 +8,31 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
+//@Table(name = "users")
 public class User {
 
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, unique = true)
-    private Integer id;
+    private int id;
+
+    @Column( nullable = false, unique = true)
+    private String kilterId;
 
     @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(nullable = false)
+    @Column
+    private String name;
+
+    @Column
     private Integer score;
 
-    public User(String username, Integer score) {
+    @Column
+    private Integer grade;
+
+    public User(String kilterId, String username) {
+        this.kilterId = kilterId;
         this.username = username;
-        this.score = score;
     }
 }
