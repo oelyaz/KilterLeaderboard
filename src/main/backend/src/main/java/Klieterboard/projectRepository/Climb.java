@@ -1,9 +1,9 @@
 package Klieterboard.projectRepository;
 
-
-import lombok.Getter;
+import lombok.*;
 
 @Getter
+@AllArgsConstructor
 public class Climb {
 
     private String uuid;
@@ -41,6 +41,36 @@ public class Climb {
             case 32 -> "8c";
             case 33 -> "8c+";
             default -> "not a valid difficulty";
+        };
+    }
+
+
+    /**
+     * Calculates the score for a given boulder difficulty based on the level of the boulderer.
+     * @param userGrade average user grade
+     * @param difficulty difficulty of the boulder
+     * @return The score for the given boulder.
+     */
+    public static int scoreForBoulder(int userGrade, int difficulty){
+        if(difficulty < 10 || difficulty > 33) return 0;
+        if(userGrade < 10 || userGrade > 33) return 0;
+
+        int diff = difficulty - userGrade;
+
+        if(diff >= 4) return 222;
+        if(diff <= -6) return 1;
+
+        return switch (diff){
+            case 3 -> 185;
+            case 2 -> 150;
+            case 1 -> 120;
+            case 0 -> 100;
+            case -1 -> 90;
+            case -2 -> 75;
+            case -3 -> 55;
+            case -4 -> 22;
+            case -5 -> 11;
+            default -> 0;
         };
     }
 

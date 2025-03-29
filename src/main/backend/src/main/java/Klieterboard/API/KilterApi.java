@@ -1,6 +1,7 @@
-package API;
+package Klieterboard.API;
 
 import Klieterboard.entity.User;
+import Klieterboard.projectRepository.Logbook;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -104,7 +105,7 @@ public class KilterApi {
                 .uri(URI.create(baseUrl + "/explore?q="+username+"&t=user"))
                 .GET()
                 .header("Cookie", "PHPSESSID=v328j3dchjemljsh4ns339fubq")
-                .header("Cookie", "\""+token+"\"")
+                .header("Cookie", "token="+token)
                 .header("Content-Type", "application/json")
                 .build();
         HttpResponse<String> response;
@@ -116,9 +117,9 @@ public class KilterApi {
         }
         User newUser = new User();
         try {
-            JSONObject json = new JSONObject(response.body()).getJSONObject("results");
+            JSONObject json = new JSONObject(response.body()).getJSONArray("results").getJSONObject(0);
             newUser.setUsername(json.getString("username"));
-            newUser.setKilterId(json.getString("id"));
+            newUser.setKilterId(""+ json.getInt("id"));
             newUser.setName(json.getString("name"));
         } catch (JSONException e) {
             System.out.println("User not found");
@@ -138,7 +139,7 @@ public class KilterApi {
                 .uri(URI.create(baseUrl + "/users/"+id))
                 .GET()
                 .header("Cookie", "PHPSESSID=v328j3dchjemljsh4ns339fubq")
-                .header("Cookie", "\""+token+"\"")
+                .header("Cookie", "token="+token)
                 .header("Content-Type", "application/json")
                 .build();
         HttpResponse<String> response;
@@ -151,8 +152,8 @@ public class KilterApi {
         User user = new User();
 
         try {
-            JSONObject json = new JSONObject(response.body()).getJSONObject("users");
-            user.setKilterId(json.getString("id"));
+            JSONObject json = new JSONObject(response.body()).getJSONArray("users").getJSONObject(0);
+            user.setKilterId(""+json.getInt("id"));
             user.setUsername(json.getString("username"));
             user.setName(json.getString("name"));
         } catch (JSONException e) {
@@ -165,15 +166,14 @@ public class KilterApi {
     /**
      * Gets logbook from climber with the given id.
      * @param id id of the user whose logbook is requested
-     * @return JSON-Array containing the climbs. <br> If the user is not found or there was an error, {@code null} is returned.
+     * @return a Logbook object. <br> If the user is not found or there was an error, {@code null} is returned.
      */
-    //TODO should return an Object, not yet thought about which, new class will probably be needed
-    public JSONArray getLogBook(String id){
+    public Logbook getLogBook(String id){
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(baseUrl + "/users/"+id+"/logbook?types=bid,ascent"))
                 .GET()
                 .header("Cookie", "PHPSESSID=v328j3dchjemljsh4ns339fubq")
-                .header("Cookie", "\""+token+"\"")
+                .header("Cookie", "token="+token)
                 .header("Content-Type", "application/json")
                 .build();
         HttpResponse<String> response;
@@ -184,7 +184,7 @@ public class KilterApi {
             return null;
         }
 
-        return new JSONObject(response.body()).getJSONArray("logbook");
+        return new Logbook(new JSONObject(response.body()).getJSONArray("logbook"));
     }
 
 

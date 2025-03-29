@@ -1,19 +1,18 @@
 package Klieterboard.projectRepository;
 
 import org.json.JSONArray;
+import java.util.*;
 
 public class Logbook {
 
-    private JSONArray logbook;
+    private final JSONArray logbook;
     private int maxDifficulty;
     private int lastDifficulty;
-    private int averageDifficulty;
 
     public Logbook(JSONArray logbook) {
         this.logbook = logbook;
         maxDifficulty = Integer.MIN_VALUE;
         lastDifficulty = Integer.MIN_VALUE;
-        averageDifficulty = Integer.MIN_VALUE;
     }
 
     /**
@@ -54,7 +53,7 @@ public class Logbook {
      */
     public int determineAverageDifficulty(int lastXClimbs){
         int climbs = 0;
-        int sum = 0;
+        double sum = 0;
         for(int i = 0; i < logbook.length() && climbs < lastXClimbs; ){
             if(logbook.getJSONObject(i).getString("_type").equals("ascent")){
                     sum += logbook.getJSONObject(i).getInt("difficulty");
@@ -65,11 +64,31 @@ public class Logbook {
             System.out.println("No boulder send");
             return -1;
         }
-        averageDifficulty = sum / climbs;
-        return averageDifficulty;
+        return (int) Math.round(sum / climbs);
     }
 
+    /**
+     * Generates a sorted list containing the difficulties of the x hardest boulders.
+     * @param topXClimbs the length the list should have
+     * @return An ascending sorted list containing the highest grades.
+     */
+    public List<Integer> determineTopDifficulties(int topXClimbs){
+        PriorityQueue<Integer> queue = new PriorityQueue<>(topXClimbs);
+        for(int i = 0; i < logbook.length();i++ ){
+            if(logbook.getJSONObject(i).getString("_type").equals("ascent")) {
+                if (queue.size() < topXClimbs) {
+                    queue.add(logbook.getJSONObject(i).getInt("difficulty"));
 
+                } else if (logbook.getJSONObject(i).getInt("difficulty")>queue.peek()) {
+                    queue.poll();
+                    queue.add(logbook.getJSONObject(i).getInt("difficulty"));
+                }
+            }
+        }
+        ArrayList<Integer> list  =  new ArrayList<>(queue);
+        list.sort(Integer::compareTo);
+        return list;
+    }
 
     /**
      * Returns the highest difficulty in the climber's logbook.
@@ -88,23 +107,26 @@ public class Logbook {
      */
     public int getLastDifficulty(){
         if(lastDifficulty == Integer.MIN_VALUE){
-            return determineHighestDifficulty();
+            return determineLastDifficulty();
         }
         return lastDifficulty;
     }
 
     /**
-     * Returns the average difficulty of the last x boulders.
-     * @param lastXClimbs number of boulders to be taken into account
-     * @return The average difficulty of the last x boulders. <br> If there are no ascents, {@code -1} is returned.
+     * Calculates the average difficulty of the x hardest boulders.
+     * @param topXClimbs  the amount of boulders to be considered
+     * @return The average difficulty. <br> If there are no ascents {@code -1} is returned
      */
-    public int getAverageDifficulty(int lastXClimbs){
-        if(averageDifficulty == Integer.MIN_VALUE){
-            return determineAverageDifficulty(lastXClimbs);
+    public int getAverageTopDifficulty(int topXClimbs){
+        double sum = 0;
+        List<Integer> list = determineTopDifficulties(topXClimbs);
+        if(list.isEmpty()){
+            return -1;
         }
-        return averageDifficulty;
+        for( int grade :  list){
+            sum += grade;
+        }
+        return (int) Math.round(sum / list.size());
     }
-
-
 
 }
