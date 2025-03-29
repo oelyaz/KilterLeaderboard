@@ -41,7 +41,7 @@ public class KilterApi {
 
 
     /**
-     * Determines the session token.
+     * Determines the session token. Used to Log in.
      */
     public void determineToken(){
         HttpRequest request = HttpRequest.newBuilder()
@@ -97,7 +97,7 @@ public class KilterApi {
      * Searches a user based on their username.
      * @param username username of the searched user
      * @return The found user.
-     * <br> If the user is not found or there was an error, null is returned.
+     * <br> If the user is not found or there was an error, {@code null} is returned.
      */
     public User searchUser(String username){
         HttpRequest request = HttpRequest.newBuilder()
@@ -131,7 +131,7 @@ public class KilterApi {
      * Searches a user based on their id.
      * @param id id of the searched user
      * @return The found user.
-     * <br> If the user is not found or there was an error, null is returned.
+     * <br> If the user is not found or there was an error, {@code null} is returned.
      */
     public User getUserById(String id){
         HttpRequest request = HttpRequest.newBuilder()
@@ -165,9 +165,10 @@ public class KilterApi {
     /**
      * Gets logbook from climber with the given id.
      * @param id id of the user whose logbook is requested
+     * @return JSON-Array containing the climbs. <br> If the user is not found or there was an error, {@code null} is returned.
      */
     //TODO should return an Object, not yet thought about which, new class will probably be needed
-    public void getLogBook(String id){
+    public JSONArray getLogBook(String id){
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(baseUrl + "/users/"+id+"/logbook?types=bid,ascent"))
                 .GET()
@@ -180,13 +181,28 @@ public class KilterApi {
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
-            return;
+            return null;
         }
-        //todo: retrieve data from response
 
-        JSONArray jsonArray = new JSONObject(response.body()).getJSONArray("logbook");
+        return new JSONObject(response.body()).getJSONArray("logbook");
+    }
 
 
+    /**
+     * Log out, token is invalidated.
+     */
+    public void logOut(){
+        HttpRequest request = HttpRequest.newBuilder()
+                .DELETE()
+                .header("Cookie", "PHPSESSID=v328j3dchjemljsh4ns339fubq")
+                .header("Authorization", "Bearer " + "92efbafe12efd323cb00464461782040ad862cfc")
+                .build();
+        HttpResponse<String> response;
+        try{
+            HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 }

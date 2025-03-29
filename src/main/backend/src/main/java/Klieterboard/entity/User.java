@@ -8,13 +8,12 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-//@Table(name = "users")
 public class User {
 
     @jakarta.persistence.Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, unique = true)
-    private int id;
+    private Integer id;
 
     @Column( nullable = false, unique = true)
     private String kilterId;
