@@ -1,10 +1,11 @@
 package Klieterboard.API;
 
-import Klieterboard.entity.User;
+import Klieterboard.entity.*;
 import Klieterboard.projectRepository.Logbook;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
 
+import java.util.*;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.*;
@@ -98,6 +99,7 @@ public class KilterApi {
      * Searches a user based on their username.
      * @param username username of the searched user
      * @return The found user.
+     * <br> If the username is not clear, {@code null} is returned
      * <br> If the user is not found or there was an error, {@code null} is returned.
      */
     public User searchUser(String username){
@@ -117,7 +119,18 @@ public class KilterApi {
         }
         User newUser = new User();
         try {
-            JSONObject json = new JSONObject(response.body()).getJSONArray("results").getJSONObject(0);
+            JSONObject json;
+            JSONArray json2 = new JSONObject(response.body()).getJSONArray("results");
+
+            if (json2.isEmpty()){
+                System.out.println("No results found, please enter a valid username");
+                return null;
+            }
+            json = json2.getJSONObject(0);
+            if (!json.getString(username).toLowerCase().equals(username.toLowerCase())) {
+                System.out.println("Please enter a complete username");
+                return null;
+            }
             newUser.setUsername(json.getString("username"));
             newUser.setKilterId(""+ json.getInt("id"));
             newUser.setName(json.getString("name"));
@@ -164,13 +177,13 @@ public class KilterApi {
     }
 
     /**
-     * Gets logbook from climber with the given id.
+     * Gets logbook from climber with the given id. Gets only ascents no bids.
      * @param id id of the user whose logbook is requested
      * @return a Logbook object. <br> If the user is not found or there was an error, {@code null} is returned.
      */
     public Logbook getLogBook(String id){
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(baseUrl + "/users/"+id+"/logbook?types=bid,ascent"))
+                .uri(URI.create(baseUrl + "/users/"+id+"/logbook?types=ascent"))
                 .GET()
                 .header("Cookie", "PHPSESSID=v328j3dchjemljsh4ns339fubq")
                 .header("Cookie", "token="+token)
@@ -184,9 +197,47 @@ public class KilterApi {
             return null;
         }
 
-        return new Logbook(new JSONObject(response.body()).getJSONArray("logbook"));
+        try {
+            return new Logbook(new JSONObject(response.body()).getJSONArray("logbook"));
+        } catch (JSONException e) {
+            return null;
+        }
     }
 
+
+    /**
+     * Gets friends from climber with the given id.
+     * @param id  id of the user whose friends are requested
+     * @return A list containing the friends, an empty list if the user doesn't have friends and {@code null} if there was an error.
+     */
+    public List<Friends> getFriends(String id){
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(baseUrl + "/users/"+id+"/followees"))
+                .GET()
+                .header("Cookie", "PHPSESSID=v328j3dchjemljsh4ns339fubq")
+                .header("Cookie", "token="+token)
+                .header("Content-Type", "application/json")
+                .build();
+        HttpResponse<String> response;
+        try{
+            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+            return null;
+        }
+        List<Friends> list =  new ArrayList<>();
+        try {
+            JSONArray jsonArray =  new JSONObject(response.body()).getJSONArray("users");
+            if(jsonArray.isEmpty()) return list;
+            for (int i = 0; i < jsonArray.length(); i++) {
+                String username = jsonArray.getJSONObject(i).getString("username");
+                list.add(new Friends(username));
+            }
+        } catch (JSONException e) {
+            return null;
+        }
+        return list;
+    }
 
     /**
      * Log out, token is invalidated.

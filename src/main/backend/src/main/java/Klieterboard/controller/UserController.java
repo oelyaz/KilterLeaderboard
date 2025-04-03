@@ -73,7 +73,7 @@ public class UserController {
      */
     @PutMapping("/update")
     public ResponseEntity<User> updateUser(@RequestBody User user){
-        User update = userService.findById(user.getId());
+        User update = userService.findByUsername(user.getUsername());
 
         update.setUsername(user.getUsername());
         update.setScore(user.getScore());
