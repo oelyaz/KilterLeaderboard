@@ -1,51 +1,81 @@
-/* Gruvbox Dark Theme */
+/* ==============================
+   Gruvbox Dark Theme Styles
+   ============================== */
 
-/* Background and text */
-html {
-    background-color: #282828;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-body {
+/* ====== Global Styles ====== */
+html, body {
     background-color: #282828;
     color: #928374;
     font-family: "Fragile Bombers Attack", sans-serif;
     margin: 0;
     padding: 0;
+    height: 100%;
+}
+
+body {
     height: 93%;
 }
 
-h1, h2, h3, h4, h5, h6 {
+/* ====== Navigation Bar ====== */
+nav {
+    display: flex;
+    align-items: center;
+    height: 10%;
+    background-color: #1d2021;
+}
+
+.navbar .heading {
     color: #b16286;
-    text-align: left;
-    padding-left: 0.5em;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
     font-family: "Fragile Bombers Attack", serif;
-    font-size: 4rem;
+    font-size: 3.5rem;
     font-weight: 800;
+}
+
+.navbar .buttons {
+    margin-left: auto;
+    display: flex;
+    padding-right: 0.5em;
+    gap: 0.5em;
+}
+
+.navbar .logo {
+    padding-left: 1em;
+}
+
+.navbar .logo img {
+    height: 4em; /* Adjust size */
+    width: auto;
+}
+
+/* ====== Links ====== */
+a, .link {
+    font-size: 1.4rem;
+    text-decoration: none;
 }
 
 a {
     color: #d65d0e;
-    text-decoration: none;
-    font-size: 1.4rem;
 }
 
 a:hover {
     background-color: #444;
 }
 
-/* Navbar Styling */
-nav {
-    display: flex;
-    background-color: #282828;
+.link {
+    color: #b8bb26;
 }
 
-/* Table Styling */
+.link:hover {
+    text-decoration: underline;
+}
+
+/* ====== Tables ====== */
 table {
     max-width: 40em;
-    margin: 0 auto;
+    margin: 3em auto;
     border-collapse: collapse;
     align-content: center;
     background-color: #282828;
@@ -72,24 +102,22 @@ td {
     background-color: #3c3836;
 }
 
-/* Buttons */
+/* ====== Buttons ====== */
 button {
-    background-color: #458588;
+    background-color: #a89984;
     color: #ebdbb2;
     border: none;
-    place-self: center;
     padding: 10px 20px;
-    height: max-content;
     cursor: pointer;
     border-radius: 5px;
     font-size: 1.2rem;
 }
 
 button:hover {
-    background-color: #076678;
+    background-color: #d65d0e;
 }
 
-/* Form Inputs */
+/* ====== Form Inputs ====== */
 input, select, textarea {
     background-color: #3c3836;
     color: #ebdbb2;
@@ -104,17 +132,7 @@ input:focus, select:focus, textarea:focus {
     border-color: #d79921;
 }
 
-/* Links */
-.link {
-    color: #b8bb26;
-    text-decoration: none;
-}
-
-.link:hover {
-    text-decoration: underline;
-}
-
-/* Other Styling */
+/* ====== Headers ====== */
 .header {
     background-color: #3c3836;
     padding: 20px;
