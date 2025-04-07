@@ -1,6 +1,8 @@
 package Klieterboard.controller;
 
+import Klieterboard.API.KilterApi;
 import Klieterboard.entity.Friends;
+import Klieterboard.entity.User;
 import Klieterboard.service.FriendsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -50,6 +52,18 @@ public class FriendsController {
         Friends friend = new Friends(username);
         friendsService.insertFriends(friend);
         return ResponseEntity.ok(friend);
+    }
+
+    /**
+     * Deletes a friend in the database based on the username.
+     * @param username username of the friend to be deleted
+     * @return A Response Entity containing the deleted friend.
+     */
+    @DeleteMapping("/{username}")
+    public ResponseEntity<Friends> delete(@PathVariable String username){
+        Friends delete = friendsService.findByUsername(username);
+        friendsService.deleteById(delete.getId());
+        return ResponseEntity.ok(delete);
     }
 
 }

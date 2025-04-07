@@ -1,5 +1,7 @@
 package Klieterboard.controller;
 
+import Klieterboard.API.KilterApi;
+import Klieterboard.entity.Friends;
 import Klieterboard.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,10 +19,13 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final KilterApi kilterApi;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, KilterApi kilterApi) {
         this.userService = userService;
+        this.kilterApi = kilterApi;
+        kilterApi.determineToken();
     }
 
     /**
@@ -106,5 +111,17 @@ public class UserController {
         User delete = userService.findByUsername(username);
         userService.deleteById(delete.getId());
         return ResponseEntity.ok(delete);
+    }
+
+
+    /**
+     * Retrieves a list of all friends of a specified user.
+     * @param username username of the user whose friends are requested
+     * @return A list of all friends of the requested user.
+     */
+    @GetMapping("/friends/{username}")
+    public List<Friends> findAllFriendsFromUser(@PathVariable String username){
+        User user = userService.findByUsername(username);
+        return kilterApi.getFriends(user.getKilterId());
     }
 }

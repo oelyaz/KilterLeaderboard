@@ -15,8 +15,8 @@ import org.springframework.stereotype.Service;
 
 
 @Service
+@Configuration
 @PropertySource("classpath:credentials.properties")
-//@Configuration
 public class KilterApi {
 
     @Getter
@@ -39,6 +39,7 @@ public class KilterApi {
 
     public KilterApi() {
         this.baseUrl = "https://kilterboardapp.com";
+        determineToken();
     }
 
 
@@ -143,7 +144,7 @@ public class KilterApi {
 
     /**
      * Searches a user based on their id.
-     * @param id id of the searched user
+     * @param id KilterId of the searched user
      * @return The found user.
      * <br> If the user is not found or there was an error, {@code null} is returned.
      */
@@ -178,7 +179,7 @@ public class KilterApi {
 
     /**
      * Gets logbook from climber with the given id. Gets only ascents no bids.
-     * @param id id of the user whose logbook is requested
+     * @param id KilterId of the user whose logbook is requested
      * @return a Logbook object. <br> If the user is not found or there was an error, {@code null} is returned.
      */
     public Logbook getLogBook(String id){
@@ -207,7 +208,7 @@ public class KilterApi {
 
     /**
      * Gets friends from climber with the given id.
-     * @param id  id of the user whose friends are requested
+     * @param id  KilterId of the user whose friends are requested
      * @return A list containing the friends, an empty list if the user doesn't have friends and {@code null} if there was an error.
      */
     public List<Friends> getFriends(String id){
