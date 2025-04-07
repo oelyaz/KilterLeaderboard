@@ -82,14 +82,26 @@ nav {
 }
 
 /* Responsive adjustments for small screens */
-@media (max-width: 1000px) {
+@media (max-width: 1100px) {
     nav {
-        flex-direction: column; /* Stack items on small screens */
-        padding: 2em;
+        padding-bottom: 4.5em;
+    }
+
+    .navbar .heading {
+        font-size: 2.5rem;
+        margin-top: 4em;
+    }
+
+    .navbar .logo {
+        padding-left: 0.5em;
+    }
+
+    .navbar .logo img {
+        height: 3em;
     }
 
     .navbar .buttons {
-        align-self: stretch;
+        padding-right: 0.2em;
     }
 }
 
@@ -123,6 +135,12 @@ table {
     align-content: center;
     background-color: #282828;
     color: #ebdbb2;
+}
+
+@media (max-width: 1100px) {
+    table {
+        margin: 13em auto;
+    }
 }
 
 thead {
