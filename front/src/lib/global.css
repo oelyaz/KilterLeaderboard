@@ -127,42 +127,6 @@ a:hover {
     text-decoration: underline;
 }
 
-/* ====== Tables ====== */
-table {
-    max-width: 40em;
-    margin: 10em auto;
-    border-collapse: collapse;
-    align-content: center;
-    background-color: #282828;
-    color: #ebdbb2;
-}
-
-@media (max-width: 1100px) {
-    table {
-        margin: 13em auto;
-    }
-}
-
-thead {
-    background-color: #282828 !important;
-}
-
-th, td {
-    border: 1px solid #1d2021 !important;
-    width: max-content;
-    padding: 10px;
-    text-align: left;
-}
-
-th {
-    background-color: #1d2021 !important;
-    color: #aec07c;
-}
-
-td {
-    background-color: #3c3836;
-}
-
 /* ====== Buttons ====== */
 button {
     background-color: #a89984;
@@ -175,31 +139,5 @@ button {
 }
 
 button:hover {
-    background-color: #d65d0e;
-}
-
-/* ====== Form Inputs ====== */
-input, select, textarea {
-    background-color: #3c3836;
-    color: #ebdbb2;
-    border: 1px solid #7c6f64;
-    padding: 10px;
-    border-radius: 5px;
-    width: 100%;
-}
-
-input:focus, select:focus, textarea:focus {
-    outline: none;
-    border-color: #d79921;
-}
-
-/* ====== Headings ====== */
-
-h2 {
-    padding: 3em;
-    text-align: center;
-    color: #ebdbb2;
-    font-family: "Fragile Bombers Attack", sans-serif;
-    font-size: 2.5rem;
-    font-weight: 600;
+    background-color: #aec07c;
 }
