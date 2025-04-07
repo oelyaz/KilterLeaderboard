@@ -3,8 +3,13 @@
    ============================== */
 
 /* ====== Global Styles ====== */
-html, body {
+html {
     background-color: #282828;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Cpath d='M 0,10 Q 25,30 50,10' fill='transparent' stroke='%23606060' stroke-width='0.3'/%3E%3Cpath d='M 0,25 Q 25,45 50,25' fill='transparent' stroke='%23606060' stroke-width='0.3'/%3E%3Cpath d='M 0,40 Q 25,60 50,40' fill='transparent' stroke='%23606060' stroke-width='0.3'/%3E%3C/svg%3E");
+    background-size: 50px 50px;  /* Smaller, tighter grid */
+    background-repeat: repeat;
+    opacity: 1; /* Keep at 1 here, we'll adjust using ::before */
+    position: relative;
     color: #928374;
     font-family: "Fragile Bombers Attack", sans-serif;
     margin: 0;
@@ -12,20 +17,46 @@ html, body {
     height: 100%;
 }
 
-body {
-    height: 93%;
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: inherit;
+    opacity: 0.01; /* Adjust for better visibility */
+    z-index: -1; /* Keeps it behind everything */
 }
 
 /* ====== Navigation Bar ====== */
 nav {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 80vw;
+    min-width: 300px;
+
+    background-color: #1d2021;
+    backdrop-filter: blur(10px);
+
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+
     display: flex;
     align-items: center;
-    height: 10%;
-    background-color: #1d2021;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allows items to move to a new line */
+    flex-direction: row;
+
+    z-index: 1000;
 }
 
 .navbar .heading {
-    color: #b16286;
+    color: #fb4934;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
@@ -48,6 +79,18 @@ nav {
 .navbar .logo img {
     height: 4em; /* Adjust size */
     width: auto;
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 1000px) {
+    nav {
+        flex-direction: column; /* Stack items on small screens */
+        padding: 2em;
+    }
+
+    .navbar .buttons {
+        align-self: stretch;
+    }
 }
 
 /* ====== Links ====== */
@@ -75,7 +118,7 @@ a:hover {
 /* ====== Tables ====== */
 table {
     max-width: 40em;
-    margin: 3em auto;
+    margin: 10em auto;
     border-collapse: collapse;
     align-content: center;
     background-color: #282828;
@@ -95,7 +138,7 @@ th, td {
 
 th {
     background-color: #1d2021 !important;
-    color: #d65d0e;
+    color: #aec07c;
 }
 
 td {
@@ -132,11 +175,13 @@ input:focus, select:focus, textarea:focus {
     border-color: #d79921;
 }
 
-/* ====== Headers ====== */
-.header {
-    background-color: #3c3836;
-    padding: 20px;
-    color: #ebdbb2;
+/* ====== Headings ====== */
+
+h2 {
+    padding: 3em;
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: #ebdbb2;
+    font-family: "Fragile Bombers Attack", sans-serif;
+    font-size: 2.5rem;
+    font-weight: 600;
 }

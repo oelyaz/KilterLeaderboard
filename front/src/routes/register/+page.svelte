@@ -5,4 +5,5 @@
 
 <Navbar />
 
-<h2>Enter username to register!</h2>
+<body>If you want to join the board, you have to be a friend of somebody already on it.</body>
+<h2>Enter username to register:</h2>
