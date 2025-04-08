@@ -1,6 +1,9 @@
 package Klieterboard.service;
 
+import Klieterboard.API.KilterApi;
+import Klieterboard.entity.Friends;
 import Klieterboard.entity.User;
+import Klieterboard.repository.IFriendsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import Klieterboard.repository.IUserRepository;
@@ -11,10 +14,15 @@ import java.util.List;
 public class UserService implements IUserService{
 
     private final IUserRepository userRepository;
+    private final IFriendsRepository friendsRepository;
+    private final KilterApi kilterApi;
 
     @Autowired
-    public UserService(IUserRepository userRepository) {
+    public UserService(IUserRepository userRepository, IFriendsRepository friendsRepository, KilterApi kilterApi) {
         this.userRepository = userRepository;
+        this.friendsRepository = friendsRepository;
+        this.kilterApi = kilterApi;
+        kilterApi.determineToken();
     }
 
     /**
@@ -83,5 +91,18 @@ public class UserService implements IUserService{
     @Override
     public User insertUser(User user) {
         return userRepository.save(user);
+    }
+
+    public List<String> getFriends(User user) {
+        return kilterApi.getFriends(user.getKilterId());
+    }
+
+    public void insertFriends(User user){
+        List<String> list = kilterApi.getFriends(user.getKilterId());
+        for(String friend : list){
+            if(friendsRepository.findByUsername(friend) == null) {
+                friendsRepository.save(new Friends(friend));
+            }
+        }
     }
 }

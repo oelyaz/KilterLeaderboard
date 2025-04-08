@@ -165,6 +165,20 @@ public class UserController {
     public List<String> findAllFriendsFromUser(@PathVariable String username){
         User user = userService.findByUsername(username);
         if(user == null) return List.of("This user is not on the leaderboard.");
-        return kilterApi.getFriends(user.getKilterId());
+        return userService.getFriends(user);
     }
+
+    /**
+     * Inserts all friends of the specified user in the database.
+     * @param username username of the user whose friends should be added to the database
+     * @return a ResponseEntity
+     */
+    @PostMapping("/friends/{username}")
+    public ResponseEntity<String> putAllFriendsInDB(@PathVariable String username){
+        User user = userService.findByUsername(username);
+        if(user == null) return ResponseEntity.notFound().build();
+        userService.insertFriends(user);
+        return ResponseEntity.ok().build();
+    }
+
 }
