@@ -1,0 +1,15 @@
+C:\Users\rebec\Documents\Projekte\KlieterBoard\src\main\backend\src\main\java\Klieterboard\API\KilterApi.java
+C:\Users\rebec\Documents\Projekte\KlieterBoard\src\main\backend\src\main\java\Klieterboard\Config\WebClientConfig.java
+C:\Users\rebec\Documents\Projekte\KlieterBoard\src\main\backend\src\main\java\Klieterboard\controller\FriendsController.java
+C:\Users\rebec\Documents\Projekte\KlieterBoard\src\main\backend\src\main\java\Klieterboard\controller\UserController.java
+C:\Users\rebec\Documents\Projekte\KlieterBoard\src\main\backend\src\main\java\Klieterboard\entity\Friends.java
+C:\Users\rebec\Documents\Projekte\KlieterBoard\src\main\backend\src\main\java\Klieterboard\entity\User.java
+C:\Users\rebec\Documents\Projekte\KlieterBoard\src\main\backend\src\main\java\Klieterboard\KlieterboardApplication.java
+C:\Users\rebec\Documents\Projekte\KlieterBoard\src\main\backend\src\main\java\Klieterboard\projectRepository\Climb.java
+C:\Users\rebec\Documents\Projekte\KlieterBoard\src\main\backend\src\main\java\Klieterboard\projectRepository\Logbook.java
+C:\Users\rebec\Documents\Projekte\KlieterBoard\src\main\backend\src\main\java\Klieterboard\repository\IFriendsRepository.java
+C:\Users\rebec\Documents\Projekte\KlieterBoard\src\main\backend\src\main\java\Klieterboard\repository\IUserRepository.java
+C:\Users\rebec\Documents\Projekte\KlieterBoard\src\main\backend\src\main\java\Klieterboard\service\FriendsService.java
+C:\Users\rebec\Documents\Projekte\KlieterBoard\src\main\backend\src\main\java\Klieterboard\service\IFriendsService.java
+C:\Users\rebec\Documents\Projekte\KlieterBoard\src\main\backend\src\main\java\Klieterboard\service\IUserService.java
+C:\Users\rebec\Documents\Projekte\KlieterBoard\src\main\backend\src\main\java\Klieterboard\service\UserService.java
