@@ -12,6 +12,7 @@
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
           <factory-entry name="KlieterBoard" value="7382a7e2-69ec-4da9-b146-6bf174bf2cb9" />
+          <factory-entry name="entityManagerFactory" value="57cfc25c-2d8d-4b6e-a343-42f642a0affe" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>
