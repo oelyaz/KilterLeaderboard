@@ -211,7 +211,7 @@ public class KilterApi {
      * @param id  KilterId of the user whose friends are requested
      * @return A list containing the friends, an empty list if the user doesn't have friends and {@code null} if there was an error.
      */
-    public List<Friends> getFriends(String id){
+    public List<String> getFriends(String id){
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(baseUrl + "/users/"+id+"/followees"))
                 .GET()
@@ -226,13 +226,13 @@ public class KilterApi {
             e.printStackTrace();
             return null;
         }
-        List<Friends> list =  new ArrayList<>();
+        List<String> list =  new ArrayList<>();
         try {
             JSONArray jsonArray =  new JSONObject(response.body()).getJSONArray("users");
             if(jsonArray.isEmpty()) return list;
             for (int i = 0; i < jsonArray.length(); i++) {
                 String username = jsonArray.getJSONObject(i).getString("username");
-                list.add(new Friends(username));
+                list.add(username);
             }
         } catch (JSONException e) {
             return null;

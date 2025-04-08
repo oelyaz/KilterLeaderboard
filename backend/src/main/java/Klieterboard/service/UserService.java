@@ -38,6 +38,16 @@ public class UserService implements IUserService{
     }
 
     /**
+     * Finds a user based on their kilterId
+     * @param kilterId kilterId of the requested user
+     * @return the requested user entity
+     */
+    @Override
+    public User findByKilterId(String kilterId) {
+        return userRepository.findByKilterId(kilterId);
+    }
+
+    /**
      * Returns a List of all users saved in the database
      * @return a List of all users
      */

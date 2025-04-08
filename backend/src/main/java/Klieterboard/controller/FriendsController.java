@@ -49,6 +49,9 @@ public class FriendsController {
      */
     @PostMapping("/create")
     public ResponseEntity<Friends> create(@RequestBody String username){
+        if(username == null || username.isEmpty()){
+            return ResponseEntity.badRequest().build();
+        }
         Friends friend = new Friends(username);
         friendsService.insertFriends(friend);
         return ResponseEntity.ok(friend);
@@ -62,6 +65,9 @@ public class FriendsController {
     @DeleteMapping("/{username}")
     public ResponseEntity<Friends> delete(@PathVariable String username){
         Friends delete = friendsService.findByUsername(username);
+        if(delete == null){
+            return ResponseEntity.notFound().build();
+        }
         friendsService.deleteById(delete.getId());
         return ResponseEntity.ok(delete);
     }
