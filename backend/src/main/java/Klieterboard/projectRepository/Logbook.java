@@ -1,9 +1,13 @@
 package Klieterboard.projectRepository;
 
-import org.json.JSONArray;
+import org.json.*;
+import java.text.*;
+import java.time.*;
 import java.util.*;
 
 public class Logbook {
+
+    private static final LocalDate date = LocalDate.of(2025, 1, 1);
 
     private final JSONArray logbook;
     private int maxDifficulty;
@@ -127,6 +131,40 @@ public class Logbook {
             sum += grade;
         }
         return (int) Math.round(sum / list.size());
+    }
+
+    /**
+     * !! Not yet implemented !! returns 0 !!
+     * <br> <br> Determines the score.
+     * @return the score
+     */
+    public int determineScore(int userGrade){
+        //TODO implement method
+        int score = 0;
+        Date seasonBeginning= new Date(125, 0, 1, 0, 0, 0);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        for (int i = 0; i < logbook.length(); i++) {
+            try {
+                JSONObject json = logbook.getJSONObject(i);
+                if(! json.get("_type").equals("ascent")){
+                    continue;
+                }
+                String date = json.getString("climbed_at");
+                Date d;
+                try {
+                    d = sdf.parse(date);
+                } catch (ParseException e) {
+                    continue;
+                }
+                if(d.before(seasonBeginning)) break;
+
+                score += Climb.scoreForBoulder(userGrade, json.getInt("difficulty"));
+            } catch (JSONException e) {
+                continue;
+            }
+        }
+        return score;
     }
 
 }

@@ -3,6 +3,7 @@ package Klieterboard.service;
 import Klieterboard.API.KilterApi;
 import Klieterboard.entity.Friends;
 import Klieterboard.entity.User;
+import Klieterboard.projectRepository.Logbook;
 import Klieterboard.repository.IFriendsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -93,10 +94,21 @@ public class UserService implements IUserService{
         return userRepository.save(user);
     }
 
+    /**
+     * Retrieves a list of all friends of a specified user.
+     * @param user user whose friends are requested
+     * @return A list of the usernames of all friends of the requested user.
+     */
+    @Override
     public List<String> getFriends(User user) {
         return kilterApi.getFriends(user.getKilterId());
     }
 
+    /**
+     * Inserts all friends of the specified user in the database.
+     * @param user user whose friends should be added to the database
+     */
+    @Override
     public void insertFriends(User user){
         List<String> list = kilterApi.getFriends(user.getKilterId());
         for(String friend : list){
@@ -104,5 +116,45 @@ public class UserService implements IUserService{
                 friendsRepository.save(new Friends(friend));
             }
         }
+    }
+
+    /**
+     * Inserts a kilter-user to the database.
+     * @param username username of the user to be inserted
+     * @return the inserted user entity
+     */
+    @Override
+    public User createKilterUser(String username){
+        User user = kilterApi.searchUser(username);
+        if(user == null) {
+            return null;
+        }
+        Logbook logbook = kilterApi.getLogBook(user.getKilterId());
+        if(logbook == null) {
+            user.setScore(0);
+            user.setGrade(0);
+
+        }else{
+            user.setGrade(logbook.getLastDifficulty());
+            user.setScore(logbook.determineScore(logbook.getAverageTopDifficulty(10)));
+        }
+        insertFriends(user);
+        userRepository.save(user);
+        return user;
+
+    }
+
+    /**
+     * Updates the score and the grade of the specified user.
+     * @param user user whose score and grade should be updated
+     * @return the updated user entity
+     */
+    @Override
+    public User updateGradeAndScore(User user){
+        Logbook logbook = kilterApi.getLogBook(user.getKilterId());
+        user.setGrade(logbook.getLastDifficulty());
+        user.setScore(logbook.determineScore(logbook.getAverageTopDifficulty(10)));
+        userRepository.save(user);
+        return user;
     }
 }

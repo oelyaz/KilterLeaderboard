@@ -1,7 +1,5 @@
 package Klieterboard;
 
-import Klieterboard.controller.UserController;
-import Klieterboard.service.UserService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;

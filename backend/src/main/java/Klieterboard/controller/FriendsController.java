@@ -1,8 +1,6 @@
 package Klieterboard.controller;
 
-import Klieterboard.API.KilterApi;
 import Klieterboard.entity.Friends;
-import Klieterboard.entity.User;
 import Klieterboard.service.FriendsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

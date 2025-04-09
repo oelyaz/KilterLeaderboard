@@ -13,5 +13,9 @@ public interface IUserService {
     void deleteById(Integer id);
     User saveUser(User user);
     User insertUser(User user);
+    List<String> getFriends(User user);
+    void insertFriends(User user);
+    User createKilterUser(String username);
+    User updateGradeAndScore(User user);
 
 }

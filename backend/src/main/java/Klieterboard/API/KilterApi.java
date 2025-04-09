@@ -127,19 +127,28 @@ public class KilterApi {
                 System.out.println("No results found, please enter a valid username");
                 return null;
             }
-            json = json2.getJSONObject(0);
-            if (!json.getString(username).toLowerCase().equals(username.toLowerCase())) {
+
+            for (int i = 0; i < json2.length(); i++) {
+                json = json2.getJSONObject(i);
+                if (json.getString("username").toLowerCase().equals(username.toLowerCase())){
+                    newUser.setUsername(json.getString("username"));
+                    newUser.setKilterId(""+ json.getInt("id"));
+                    try {
+                        newUser.setName(json.getString("name"));
+                    } catch (JSONException e) {
+                        ;
+                    }
+                    return newUser;
+                }
+
+            }
                 System.out.println("Please enter a complete username");
                 return null;
-            }
-            newUser.setUsername(json.getString("username"));
-            newUser.setKilterId(""+ json.getInt("id"));
-            newUser.setName(json.getString("name"));
+
         } catch (JSONException e) {
             System.out.println("User not found");
             return null;
         }
-        return newUser;
     }
 
     /**
@@ -186,7 +195,7 @@ public class KilterApi {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(baseUrl + "/users/"+id+"/logbook?types=ascent"))
                 .GET()
-                .header("Cookie", "PHPSESSID=v328j3dchjemljsh4ns339fubq")
+                .header("Cookie", "PHPSESSID=8fql4sa3tmi6nmu4uviuj5eesl")
                 .header("Cookie", "token="+token)
                 .header("Content-Type", "application/json")
                 .build();
@@ -197,6 +206,7 @@ public class KilterApi {
             e.printStackTrace();
             return null;
         }
+        System.out.println(response.statusCode());
 
         try {
             return new Logbook(new JSONObject(response.body()).getJSONArray("logbook"));
@@ -245,16 +255,18 @@ public class KilterApi {
      */
     public void logOut(){
         HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://kilterboardapp.com/sessions/"+ token))
                 .DELETE()
                 .header("Cookie", "PHPSESSID=v328j3dchjemljsh4ns339fubq")
-                .header("Authorization", "Bearer " + "92efbafe12efd323cb00464461782040ad862cfc")
+                .header("Authorization", "Bearer " + token)
                 .build();
         HttpResponse<String> response;
         try{
-            HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
+
     }
 
 }

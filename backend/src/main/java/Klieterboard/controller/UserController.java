@@ -1,6 +1,5 @@
 package Klieterboard.controller;
 
-import Klieterboard.API.KilterApi;
 import Klieterboard.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +8,6 @@ import Klieterboard.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @Controller
@@ -19,13 +17,10 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-    private final KilterApi kilterApi;
 
     @Autowired
-    public UserController(UserService userService, KilterApi kilterApi) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.kilterApi = kilterApi;
-        kilterApi.determineToken();
     }
 
     /**
@@ -67,26 +62,40 @@ public class UserController {
         return userService.findByKilterId(kilterId);
     }
 
+//    /**
+//     * Creates a new user.
+//     * @param user user to be created
+//     * @return a ResponseEntity
+//     */
+//    @PostMapping("/create")
+//    public ResponseEntity<User> createUser(@RequestBody User user){
+//        if(user == null || user.getKilterId() == null || user.getUsername() == null){
+//            return ResponseEntity.badRequest().build();
+//        }
+//        User newUser = new User(user.getKilterId(),user.getUsername());
+//        if(user.getScore() != null) newUser.setScore(user.getScore());
+//        if(user.getName()!= null) newUser.setName(user.getName());
+//        if(user.getGrade()!= null) newUser.setGrade(user.getGrade());
+//
+//        if(findByUsername(newUser.getUsername()) != null) return ResponseEntity.badRequest().build();
+//        if(findByKilterId(newUser.getKilterId()) != null) return ResponseEntity.badRequest().build();
+//
+//        userService.insertUser(newUser);
+//        return ResponseEntity.ok(newUser);
+//    }
+
     /**
-     * Creates a new user.
-     * @param user user to be created
+     * Inserts a kilter-user to the database.
+     * @param username username of the user to be inserted
      * @return a ResponseEntity
      */
     @PostMapping("/create")
-    public ResponseEntity<User> createUser(@RequestBody User user){
-        if(user == null || user.getKilterId() == null || user.getUsername() == null){
+    public ResponseEntity<User> createKilterUser(@RequestBody String username){
+        if(username == null){
             return ResponseEntity.badRequest().build();
         }
-        User newUser = new User(user.getKilterId(),user.getUsername());
-        if(user.getScore() != null) newUser.setScore(user.getScore());
-        if(user.getName()!= null) newUser.setName(user.getName());
-        if(user.getGrade()!= null) newUser.setGrade(user.getGrade());
 
-        if(findByUsername(newUser.getUsername()) != null) return ResponseEntity.badRequest().build();
-        if(findByKilterId(newUser.getKilterId()) != null) return ResponseEntity.badRequest().build();
-
-        userService.insertUser(newUser);
-        return ResponseEntity.ok(newUser);
+        return ResponseEntity.ok(userService.createKilterUser(username));
     }
 
     /**
@@ -109,36 +118,17 @@ public class UserController {
     }
 
     /**
-     * Updates the score of a specified user.
-     * @param username username of the user whose score is to be updated
-     * @param score the new score
+     * Updates the grade and score of a specified user.
+     * @param username username of the user whose grade and score is to be updated
      * @return a ResponseEntity
      */
-    @PatchMapping("/{username}/score")
-    public ResponseEntity<User> updateUserScore(@PathVariable String username, @RequestBody Integer score){
+    @PatchMapping("/{username}/update")
+    public ResponseEntity<User> updateGradeAndScore(@PathVariable String username){
         User update = userService.findByUsername(username);
         if(update == null){
             return ResponseEntity.notFound().build();
         }
-        update.setScore(score);
-        userService.saveUser(update);
-        return ResponseEntity.ok(update);
-    }
-
-    /**
-     * Updates the grade of a specified user.
-     * @param username username of the user whose grade is to be updated
-     * @param grade the new grade
-     * @return
-     */
-    @PatchMapping("/{username}/grade")
-    public ResponseEntity<User> updateUserGrade(@PathVariable String username, @RequestBody Integer grade){
-        User update = userService.findByUsername(username);
-        if(update == null){
-            return ResponseEntity.notFound().build();
-        }
-        update.setGrade(grade);
-        userService.saveUser(update);
+        update = userService.updateGradeAndScore(update);
         return ResponseEntity.ok(update);
     }
 
@@ -159,7 +149,7 @@ public class UserController {
     /**
      * Retrieves a list of all friends of a specified user.
      * @param username username of the user whose friends are requested
-     * @return A list of all friends of the requested user.
+     * @return A list of the usernames of all friends of the requested user.
      */
     @GetMapping("/friends/{username}")
     public List<String> findAllFriendsFromUser(@PathVariable String username){
