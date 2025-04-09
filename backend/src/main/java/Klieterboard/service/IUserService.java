@@ -10,6 +10,7 @@ public interface IUserService {
     User findById(Integer id);
     User findByKilterId(String kilterId);
     List<User> findAll();
+    List<String> findAllString();
     void deleteById(Integer id);
     User saveUser(User user);
     User insertUser(User user);

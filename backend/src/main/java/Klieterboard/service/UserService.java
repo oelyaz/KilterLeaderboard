@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import Klieterboard.repository.IUserRepository;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class UserService implements IUserService{
@@ -62,6 +62,19 @@ public class UserService implements IUserService{
     @Override
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    /**
+     * Returns a list with the usernames of all users.
+     * @return A list with the usernames of all users.
+     */
+    @Override
+    public List<String> findAllString(){
+        List<String> list = new ArrayList<>();
+        for(User user : userRepository.findAll()){
+            list.add(user.getUsername());
+        }
+        return list;
     }
 
     /**

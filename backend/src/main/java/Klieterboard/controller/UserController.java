@@ -33,6 +33,16 @@ public class UserController {
     }
 
     /**
+     * Returns a list with the usernames of all users.
+     * @return A list with the usernames of all users.
+     */
+    @GetMapping("/all/string")
+    public List<String> findAllString(){
+        return userService.findAllString();
+    }
+
+
+    /**
      * Finds a user based on their username.
      * @param username username of the requested user
      * @return the requested user

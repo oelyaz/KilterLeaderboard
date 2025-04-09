@@ -31,6 +31,15 @@ public class FriendsController {
     }
 
     /**
+     * Returns a list of the usernames of all friends.
+     * @return A list of the usernames of all friends.
+     */
+    @GetMapping("/all/string")
+    public List<String> findAllString(){
+        return friendsService.findAllString();
+    }
+
+    /**
      * Fiends a friend based on their username.
      * @param username username of the requested friend
      * @return The requested friend.

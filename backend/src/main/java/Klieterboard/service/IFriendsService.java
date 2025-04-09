@@ -11,4 +11,5 @@ public interface IFriendsService {
     void deleteById(Integer id);
     Friends saveFriends(Friends user);
     Friends insertFriends(Friends user);
+    List<String> findAllString();
 }
