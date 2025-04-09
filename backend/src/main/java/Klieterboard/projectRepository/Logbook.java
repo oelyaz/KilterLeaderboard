@@ -1,12 +1,13 @@
 package Klieterboard.projectRepository;
 
 import org.json.*;
-import java.text.*;
+import java.time.*;
+import java.time.format.*;
 import java.util.*;
 
 public class Logbook {
 
-    private static final Date seasonStart = new Date(125, 0, 1, 0, 0, 0);
+    private final LocalDateTime seasonStart = LocalDateTime.of(2025, 1, 1, 0, 0, 0);
 
     private final JSONArray logbook;
     private int maxDifficulty;
@@ -139,7 +140,7 @@ public class Logbook {
      */
     public int determineScore(int userGrade){
         int score = 0;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         for (int i = 0; i < logbook.length(); i++) {
             try {
@@ -148,17 +149,17 @@ public class Logbook {
                     continue;
                 }
                 String date = json.getString("climbed_at");
-                Date d;
+                LocalDateTime d;
                 try {
-                    d = sdf.parse(date);
-                } catch (ParseException e) {
+                    d = LocalDateTime.parse(date, dtf);
+                }catch (DateTimeParseException e){
                     continue;
                 }
-                if(d.before(seasonStart)) break;
+                if(d.isBefore(seasonStart))break;
 
                 score += Climb.scoreForBoulder(userGrade, json.getInt("difficulty"));
             } catch (JSONException e) {
-                continue;
+                System.out.println(e.getMessage());
             }
         }
         return score;

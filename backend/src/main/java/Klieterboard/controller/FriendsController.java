@@ -25,7 +25,7 @@ public class FriendsController {
      * Returns a list of all friends.
      * @return A list of all friends.
      */
-    @GetMapping("/all")
+    @GetMapping("/")
     public List<Friends> findAll(){
         return friendsService.findAll();
     }
@@ -34,7 +34,7 @@ public class FriendsController {
      * Returns a list of the usernames of all friends.
      * @return A list of the usernames of all friends.
      */
-    @GetMapping("/all/string")
+    @GetMapping("/allString")
     public List<String> findAllString(){
         return friendsService.findAllString();
     }
@@ -54,8 +54,8 @@ public class FriendsController {
      * @param username username of the friend to be created
      * @return A Response Entity containing the new friend.
      */
-    @PostMapping("/create")
-    public ResponseEntity<Friends> create(@RequestBody String username){
+    @PostMapping("/{username}")
+    public ResponseEntity<Friends> create(@PathVariable String username){
         if(username == null || username.isEmpty()){
             return ResponseEntity.badRequest().build();
         }

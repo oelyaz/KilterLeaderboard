@@ -29,6 +29,8 @@ public class KilterApi {
     @Value("${kilter.password}")
     private String kilter_password;
 
+    private HttpClient client;
+
 //    private final WebClient webclient;
 
 //    @Autowired
@@ -39,6 +41,7 @@ public class KilterApi {
 
     public KilterApi() {
         this.baseUrl = "https://kilterboardapp.com";
+        client = HttpClient.newHttpClient();
     }
 
 
@@ -62,7 +65,7 @@ public class KilterApi {
                 .build();
         HttpResponse<String> response;
         try{
-            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             return;
@@ -112,7 +115,7 @@ public class KilterApi {
                 .build();
         HttpResponse<String> response;
         try{
-            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             return null;
@@ -166,7 +169,7 @@ public class KilterApi {
                 .build();
         HttpResponse<String> response;
         try{
-            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             return null;
@@ -200,7 +203,7 @@ public class KilterApi {
                 .build();
         HttpResponse<String> response;
         try{
-            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             return null;
@@ -230,7 +233,7 @@ public class KilterApi {
                 .build();
         HttpResponse<String> response;
         try{
-            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             return null;
@@ -261,7 +264,7 @@ public class KilterApi {
                 .build();
         HttpResponse<String> response;
         try{
-            response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }

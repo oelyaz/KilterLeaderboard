@@ -27,7 +27,7 @@ public class UserController {
      * Returns a list of all users.
      * @return a list of all users
      */
-    @GetMapping("/all")
+    @GetMapping("/")
     public List<User> findAll(){
         return userService.findAll();
     }
@@ -36,7 +36,7 @@ public class UserController {
      * Returns a list with the usernames of all users.
      * @return A list with the usernames of all users.
      */
-    @GetMapping("/all/string")
+    @GetMapping("/allString")
     public List<String> findAllString(){
         return userService.findAllString();
     }
@@ -99,8 +99,8 @@ public class UserController {
      * @param username username of the user to be inserted
      * @return a ResponseEntity
      */
-    @PostMapping("/create")
-    public ResponseEntity<User> createKilterUser(@RequestBody String username){
+    @PostMapping("/{username}")
+    public ResponseEntity<User> createKilterUser(@PathVariable String username){
         if(username == null){
             return ResponseEntity.badRequest().build();
         }
@@ -113,7 +113,7 @@ public class UserController {
      * @param user username of the user to be updated
      * @return a ResponseEntity
      */
-    @PutMapping("/update/{username}")
+    @PutMapping("/{username}")
     public ResponseEntity<User> updateUser(@PathVariable String username, @RequestBody User user){
         User update = userService.findByUsername(username);
         if(update == null){
