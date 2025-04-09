@@ -39,7 +39,6 @@ public class KilterApi {
 
     public KilterApi() {
         this.baseUrl = "https://kilterboardapp.com";
-        determineToken();
     }
 
 
