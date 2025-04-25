@@ -30,8 +30,4 @@ public class User {
     @Column
     private Integer grade;
 
-    public User(String kilterId, String username) {
-        this.kilterId = kilterId;
-        this.username = username;
-    }
 }

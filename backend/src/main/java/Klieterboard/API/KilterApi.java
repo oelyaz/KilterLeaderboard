@@ -29,15 +29,7 @@ public class KilterApi {
     @Value("${kilter.password}")
     private String kilter_password;
 
-    private HttpClient client;
-
-//    private final WebClient webclient;
-
-//    @Autowired
-//    public KilterApi(WebClient webclient) {
-//        this.webclient = webclient;
-//        this.baseUrl = "https://kilterboardapp.com";
-//    }
+    private final HttpClient client;
 
     public KilterApi() {
         this.baseUrl = "https://kilterboardapp.com";
@@ -73,31 +65,10 @@ public class KilterApi {
         try {
             token =  new JSONObject(response.body()).getJSONObject("session").getString("token");
         } catch (JSONException e) {
-            System.out.println("token not available, JSON Exception "+e);;
+            System.out.println("token not available, JSON Exception "+e);
         }
     }
-
-    //    public void getToken(){
-//
-//        String response = webclient.post()
-//                .uri(URI.create(baseUrl + "/sessions"))
-//                .header("Cookie", "PHPSESSID=v328j3dchjemljsh4ns339fubq")
-//                .header("Cache-Control", "no-cache")
-//                .header("Content-Type", "application/json")
-//                .header("Accept", "*/*")
-//                .bodyValue("{"
-//                        + "\"password\": \"" + kilter_password +"\", "
-//                        + "\"pp\" : \"accepted\", "
-//                        + "\"tou\": \"accepted\", "
-//                        + "\"ua\": \"app\", "
-//                        + "\"username\": \"" +kilter_username +"\""
-//                        + "}")
-//                .retrieve()
-//                .bodyToMono(String.class)
-//                .block();
-//    }
-
-
+    
     /**
      * Searches a user based on their username.
      * @param username username of the searched user
@@ -138,7 +109,7 @@ public class KilterApi {
                     try {
                         newUser.setName(json.getString("name"));
                     } catch (JSONException e) {
-                        ;
+                        continue;
                     }
                     return newUser;
                 }

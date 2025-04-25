@@ -1,7 +1,7 @@
 package Klieterboard.service;
 
 import Klieterboard.entity.Friends;
-import java.util.List;
+import java.util.*;
 
 public interface IFriendsService {
 
@@ -11,5 +11,5 @@ public interface IFriendsService {
     void deleteById(Integer id);
     Friends saveFriends(Friends user);
     Friends insertFriends(Friends user);
-    List<String> findAllString();
+    Set<String> findAllString();
 }

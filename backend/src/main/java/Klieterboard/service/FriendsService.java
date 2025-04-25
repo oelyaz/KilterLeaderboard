@@ -5,8 +5,7 @@ import Klieterboard.repository.IFriendsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class FriendsService implements IFriendsService{
@@ -52,12 +51,12 @@ public class FriendsService implements IFriendsService{
      * @return s a list of the usernames of all friends
      */
     @Override
-    public List<String> findAllString(){
-        List<String> list = new ArrayList<>();
+    public Set<String> findAllString(){
+        Set<String> set = new HashSet<>();
         for (Friends friends : friendsRepository.findAll()) {
-            list.add(friends.getUsername());
+            set.add(friends.getUsername());
         }
-        return list;
+        return set;
     }
 
     /**

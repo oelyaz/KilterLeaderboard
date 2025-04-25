@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RestController
@@ -35,7 +35,7 @@ public class FriendsController {
      * @return A list of the usernames of all friends.
      */
     @GetMapping("/allString")
-    public List<String> findAllString(){
+    public Set<String> findAllString(){
         return friendsService.findAllString();
     }
 

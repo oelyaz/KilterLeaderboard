@@ -8,7 +8,7 @@ import Klieterboard.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 @Controller
 @RestController
@@ -37,7 +37,7 @@ public class UserController {
      * @return A list with the usernames of all users.
      */
     @GetMapping("/allString")
-    public List<String> findAllString(){
+    public Set<String> findAllString(){
         return userService.findAllString();
     }
 

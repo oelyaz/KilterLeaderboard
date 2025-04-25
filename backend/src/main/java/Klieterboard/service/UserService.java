@@ -69,12 +69,12 @@ public class UserService implements IUserService{
      * @return A list with the usernames of all users.
      */
     @Override
-    public List<String> findAllString(){
-        List<String> list = new ArrayList<>();
+    public Set<String> findAllString(){
+        Set<String> set = new HashSet<>();
         for(User user : userRepository.findAll()){
-            list.add(user.getUsername());
+            set.add(user.getUsername());
         }
-        return list;
+        return set;
     }
 
     /**
