@@ -1,6 +1,7 @@
 backend/src/main/resources/credentials.properties
 /backend/target/classes/credentials.properties
 /.idea/
+.idea/
 front/node_modules
 
 # Output
