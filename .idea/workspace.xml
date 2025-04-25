@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="891bfa52-113e-4b88-b86f-8b716e33b7d8" name="Changes" comment="began register site">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/.svelte-kit/generated/server/internal.js" beforeDir="false" afterPath="$PROJECT_DIR$/front/.svelte-kit/generated/server/internal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/front/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/front/src/lib/Navbar.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/lib/Navbar.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/front/src/lib/global.css" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/lib/global.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/front/src/routes/page.css" beforeDir="false" afterPath="$PROJECT_DIR$/front/src/routes/page.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,9 +20,9 @@
         <option value="App" />
         <option value="TypeScript File" />
         <option value="leaderboard" />
-        <option value="CSS File" />
         <option value="+page" />
         <option value="Navbar" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -58,24 +55,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;frontend&quot;,
-    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;npm.init vite.executor&quot;: &quot;Run&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/home/oelyaz/Documents/WebstormProjects/KlieterBoard/front/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "frontend",
+    "list.type.of.created.stylesheet": "CSS",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "npm.init vite.executor": "Run",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.General",
+    "ts.external.directory.path": "/home/oelyaz/Documents/WebstormProjects/KlieterBoard/front/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/front/src/lib" />
@@ -102,6 +99,7 @@
       <workItem from="1742478578040" duration="9713000" />
       <workItem from="1743108037827" duration="9936000" />
       <workItem from="1743496352438" duration="5953000" />
+      <workItem from="1743674818648" duration="17502000" />
     </task>
     <task id="LOCAL-00001" summary="began register site">
       <option name="closed" value="true" />

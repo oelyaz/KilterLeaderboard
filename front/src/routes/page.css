@@ -5,6 +5,8 @@ table {
     border-collapse: collapse;
     align-content: center;
     background-color: #282828;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 10px rgba(7, 5, 5, 0.55);
     color: #ebdbb2;
 }
 
