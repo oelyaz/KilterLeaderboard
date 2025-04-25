@@ -1,3 +1,4 @@
 backend/src/main/resources/credentials.properties
 /backend/target/classes/credentials.properties
 /.idea/
+.idea/
