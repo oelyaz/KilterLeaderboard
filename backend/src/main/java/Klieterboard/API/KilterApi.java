@@ -109,7 +109,7 @@ public class KilterApi {
                     try {
                         newUser.setName(json.getString("name"));
                     } catch (JSONException e) {
-                        continue;
+                        return newUser;
                     }
                     return newUser;
                 }
@@ -117,7 +117,6 @@ public class KilterApi {
             }
                 System.out.println("Please enter a complete username");
                 return null;
-
         } catch (JSONException e) {
             System.out.println("User not found");
             return null;

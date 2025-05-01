@@ -113,7 +113,7 @@ public class UserService implements IUserService{
      */
     @Override
     public List<String> getFriends(User user) {
-        return kilterApi.getFriends(user.getKilterId());
+        return insertFriends(user);
     }
 
     /**
@@ -121,13 +121,14 @@ public class UserService implements IUserService{
      * @param user user whose friends should be added to the database
      */
     @Override
-    public void insertFriends(User user){
+    public List<String> insertFriends(User user){
         List<String> list = kilterApi.getFriends(user.getKilterId());
         for(String friend : list){
             if(friendsRepository.findByUsername(friend) == null) {
                 friendsRepository.save(new Friends(friend));
             }
         }
+        return list;
     }
 
     /**

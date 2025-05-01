@@ -1,19 +1,19 @@
-package Klieterboard.security;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.*;
-import org.springframework.security.config.*;
-import org.springframework.security.config.annotation.web.builders.*;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.core.userdetails.*;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.web.*;
+//package Klieterboard.security;
+//
+//import org.springframework.beans.factory.annotation.Value;
+//import org.springframework.context.annotation.*;
+//import org.springframework.security.config.*;
+//import org.springframework.security.config.annotation.web.builders.*;
+//import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+//import org.springframework.security.core.userdetails.*;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+//import org.springframework.security.web.*;
 
 //@Configuration
 //@PropertySource("classpath:credentials.properties")
-public class SecurityConfig {
+//public class SecurityConfig {
 //
 //    @Value("${spring.security.user.name}")
 //    private String username;
@@ -42,4 +42,4 @@ public class SecurityConfig {
 //    public PasswordEncoder passwordEncoder() {
 //        return new BCryptPasswordEncoder();
 //    }
-}
+//}
