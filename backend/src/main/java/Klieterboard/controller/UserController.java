@@ -104,28 +104,32 @@ public class UserController {
         if(username == null){
             return ResponseEntity.badRequest().build();
         }
-
-        return ResponseEntity.ok(userService.createKilterUser(username));
-    }
-
-    /**
-     * Updates a specified user.
-     * @param user username of the user to be updated
-     * @return a ResponseEntity
-     */
-    @PutMapping("/{username}")
-    public ResponseEntity<User> updateUser(@PathVariable String username, @RequestBody User user){
-        User update = userService.findByUsername(username);
-        if(update == null){
+        User user = userService.createKilterUser(username);
+        if(user == null){
             return ResponseEntity.notFound().build();
         }
-        if(user.getUsername() != null) update.setUsername(user.getUsername());
-        if(user.getScore() != null) update.setScore(user.getScore());
-        if(user.getName()!= null) update.setName(user.getName());
-        if(user.getGrade()!= null) update.setGrade(user.getGrade());
-        userService.saveUser(update);
-        return ResponseEntity.ok(update);
+
+        return ResponseEntity.ok(user);
     }
+
+//    /**
+//     * Updates a specified user.
+//     * @param user username of the user to be updated
+//     * @return a ResponseEntity
+//     */
+//    @PutMapping("/{username}")
+//    public ResponseEntity<User> updateUser(@PathVariable String username, @RequestBody User user){
+//        User update = userService.findByUsername(username);
+//        if(update == null){
+//            return ResponseEntity.notFound().build();
+//        }
+//        if(user.getUsername() != null) update.setUsername(user.getUsername());
+//        if(user.getScore() != null) update.setScore(user.getScore());
+//        if(user.getName()!= null) update.setName(user.getName());
+//        if(user.getGrade()!= null) update.setGrade(user.getGrade());
+//        userService.saveUser(update);
+//        return ResponseEntity.ok(update);
+//    }
 
     /**
      * Updates the grade and score of a specified user.
@@ -142,18 +146,18 @@ public class UserController {
         return ResponseEntity.ok(update);
     }
 
-    /**
-     * Deletes a user in the database based on the user username.
-     * @param username username of the user to be deleted
-     * @return a ResponseEntity
-     */
-    @DeleteMapping("/{username}")
-    public ResponseEntity<User> deleteUser(@PathVariable String username){
-        User delete = userService.findByUsername(username);
-        if(delete == null){return ResponseEntity.notFound().build();}
-        userService.deleteById(delete.getId());
-        return ResponseEntity.ok(delete);
-    }
+//    /**
+//     * Deletes a user in the database based on the user username.
+//     * @param username username of the user to be deleted
+//     * @return a ResponseEntity
+//     */
+//    @DeleteMapping("/{username}")
+//    public ResponseEntity<User> deleteUser(@PathVariable String username){
+//        User delete = userService.findByUsername(username);
+//        if(delete == null){return ResponseEntity.notFound().build();}
+//        userService.deleteById(delete.getId());
+//        return ResponseEntity.ok(delete);
+//    }
 
 
     /**
@@ -168,17 +172,17 @@ public class UserController {
         return userService.getFriends(user);
     }
 
-    /**
-     * Inserts all friends of the specified user in the database.
-     * @param username username of the user whose friends should be added to the database
-     * @return a ResponseEntity
-     */
-    @PostMapping("/friends/{username}")
-    public ResponseEntity<String> putAllFriendsInDB(@PathVariable String username){
-        User user = userService.findByUsername(username);
-        if(user == null) return ResponseEntity.notFound().build();
-        userService.insertFriends(user);
-        return ResponseEntity.ok().build();
-    }
+//    /**
+//     * Inserts all friends of the specified user in the database.
+//     * @param username username of the user whose friends should be added to the database
+//     * @return a ResponseEntity
+//     */
+//    @PostMapping("/friends/{username}")
+//    public ResponseEntity<String> putAllFriendsInDB(@PathVariable String username){
+//        User user = userService.findByUsername(username);
+//        if(user == null) return ResponseEntity.notFound().build();
+//        userService.insertFriends(user);
+//        return ResponseEntity.ok().build();
+//    }
 
 }

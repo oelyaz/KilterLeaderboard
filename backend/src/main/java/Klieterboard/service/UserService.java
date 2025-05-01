@@ -137,6 +137,10 @@ public class UserService implements IUserService{
      */
     @Override
     public User createKilterUser(String username){
+        if(friendsRepository.findByUsername(username) == null) {
+            return null;
+        }
+
         User user = kilterApi.searchUser(username);
         if(user == null) {
             return null;
