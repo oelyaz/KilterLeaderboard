@@ -20,11 +20,6 @@
         } catch (error) {
             console.error(error);
         }
-        leaderboard = [
-            { "id": 1, "kilterId": "134", "username": "blub", "name": "Test Player 1", "score": 999, "grade": 12 },
-            { "id": 2, "kilterId": "134", "username": "blub", "name": "Test Player 2", "score": 20, "grade": 2 },
-            { "id": 3, "kilterId": "134", "username": "blub", "name": "Test Player 3", "score": 3000, "grade": 22 }
-        ];
         leaderboard.sort((a: Climber, b: Climber) => b.score - a.score);
     }
 
