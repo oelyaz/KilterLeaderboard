@@ -5,10 +5,12 @@ import Klieterboard.entity.*;
 import Klieterboard.projectRepository.Logbook;
 import Klieterboard.repository.IFriendsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import Klieterboard.repository.IUserRepository;
 
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.*;
 
 @Service
@@ -177,12 +179,20 @@ public class UserService {
 
 
     /**
-     * Launches a new season. Grade and score of all users will be updated.
-     *
-     * @param start the start date of the new season
+     * Launches a new season every january 1st and july 1st. <br>
+     * Grade and score of all users will be updated.
      */
-    public void newSeason(LocalDateTime start) {
-        Logbook.setSeasonStart(start);
+    @Scheduled(cron = "0 0 0 1 1,7 ?")
+    public void newSeason() {
+        int year = LocalDateTime.now().getYear();
+        if (LocalDateTime.now().getMonth().equals(Month.JANUARY)) {
+            Logbook.setSeasonStart(LocalDateTime.of(year, 1, 1, 0, 0, 0));
+        } else if (LocalDateTime.now().getMonth().equals(Month.JULY)) {
+            Logbook.setSeasonStart(LocalDateTime.of(year, 7, 1, 0, 0, 0));
+        } else {
+            System.out.println("Scheduler made a mistake");
+            return;
+        }
         for (User user : findAll()) {
             Logbook logbook = kilterApi.getLogBook(user.getKilterId());
             if (logbook != null) {
@@ -191,6 +201,7 @@ public class UserService {
             } else {
                 user.setScore(0);
             }
+            userRepository.save(user);
         }
     }
 }

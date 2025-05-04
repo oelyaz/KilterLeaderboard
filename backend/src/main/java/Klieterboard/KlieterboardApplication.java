@@ -4,6 +4,7 @@ import Klieterboard.projectRepository.Logbook;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 import java.time.LocalDateTime;
 
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
  * Use for starting the Application
  */
 
-
+@EnableScheduling
 @SpringBootApplication
 public class KlieterboardApplication {
 

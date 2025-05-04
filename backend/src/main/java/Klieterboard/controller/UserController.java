@@ -223,20 +223,4 @@ public class UserController {
 //        return ResponseEntity.ok().build();
 //    }
 
-
-    /**
-     * Launches a new season. Grade and score of all users will be updated.
-     *
-     * @param start the start date of the new season
-     * @return a ResponseEntity
-     */
-    @CrossOrigin
-    @PatchMapping("/newSeason")
-    public ResponseEntity<LocalDateTime> newSeason(@RequestBody LocalDateTime start) {
-        if (start == null) return ResponseEntity.badRequest().build();
-        userService.newSeason(start);
-        return ResponseEntity.ok(start);
-    }
-
-
 }
