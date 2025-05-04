@@ -16,7 +16,7 @@
     <div class="logo">
         <img src="{logoSrc}" alt="logo">
     </div>
-    <h1 class="heading">KilterLeaderBoard</h1>
+    <h1 class="heading">Kilter Leaderboard</h1>
     <div class="buttons">
         <button on:click={navigate_leaderboard}>
             <img src="node_modules/lucide-static/icons/medal.svg" alt="Leaderboard">

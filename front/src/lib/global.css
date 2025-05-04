@@ -11,7 +11,7 @@ html {
     opacity: 1; /* Keep at 1 here, we'll adjust using ::before */
     position: relative;
     color: #928374;
-    font-family: "Fragile Bombers Attack", sans-serif;
+    font-family: "Noto Sans", sans-serif;
     margin: 0;
     padding: 0;
     height: 100%;
@@ -60,9 +60,10 @@ nav {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    font-family: "Fragile Bombers Attack", serif;
+    font-family: "Noto Serif", serif;
     font-size: 3.5rem;
     font-weight: 800;
+    white-space: nowrap;
 }
 
 .navbar .buttons {
@@ -82,13 +83,13 @@ nav {
 }
 
 /* Responsive adjustments for small screens */
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
     .navbar .heading {
         font-size: 2.5rem;
     }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
     nav {
         padding-bottom: 4.5em;
     }
