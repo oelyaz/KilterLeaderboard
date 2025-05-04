@@ -1,5 +1,6 @@
 package Klieterboard.projectRepository;
 
+import lombok.*;
 import org.json.*;
 import java.time.*;
 import java.time.format.*;
@@ -7,7 +8,9 @@ import java.util.*;
 
 public class Logbook {
 
-    private final LocalDateTime seasonStart = LocalDateTime.of(2025, 1, 1, 0, 0, 0);
+    @Getter
+    @Setter
+    private static LocalDateTime seasonStart;
 
     private final JSONArray logbook;
     private int maxDifficulty;

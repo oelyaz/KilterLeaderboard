@@ -8,6 +8,7 @@ import Klieterboard.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:5173")
@@ -18,6 +19,7 @@ import java.util.*;
 public class UserController {
 
     private final UserService userService;
+    private static LocalDateTime lastUpdate = LocalDateTime.now();
 
     @Autowired
     public UserController(UserService userService) {
@@ -26,55 +28,60 @@ public class UserController {
 
     /**
      * Returns a list of all users.
+     *
      * @return a list of all users
      */
     @CrossOrigin
     @GetMapping("/")
-    public List<User> findAll(){
+    public List<User> findAll() {
         return userService.findAll();
     }
 
     /**
      * Returns a list with the usernames of all users.
+     *
      * @return A list with the usernames of all users.
      */
     @CrossOrigin
     @GetMapping("/allString")
-    public Set<String> findAllString(){
+    public Set<String> findAllString() {
         return userService.findAllString();
     }
 
 
     /**
      * Finds a user based on their username.
+     *
      * @param username username of the requested user
      * @return the requested user
      */
     @CrossOrigin
     @GetMapping("/{username}")
-    public User findByUsername(@PathVariable String username){
+    public User findByUsername(@PathVariable String username) {
         return userService.findByUsername(username);
     }
 
     /**
      * Finds a user based on their id.
+     *
      * @param id id (not kilterId) of the requested user
      * @return the requested user
      */
     @CrossOrigin
     @GetMapping("/id/{id}")
-    public User findById(@PathVariable Integer id){
+    public User findById(@PathVariable Integer id) {
         return userService.findById(id);
     }
 
     /**
      * Finds a user based on their kilterId.
+     *
      * @param kilterId kilterId of the requested user
      * @return the requested user
      */
     @CrossOrigin
     @GetMapping("/kilterId/{kilterId}")
-    public User findByKilterId(@PathVariable String kilterId){
+    public User findByKilterId(@PathVariable String kilterId) {
         return userService.findByKilterId(kilterId);
     }
 
@@ -102,17 +109,18 @@ public class UserController {
 
     /**
      * Inserts a kilter-user to the database.
+     *
      * @param username username of the user to be inserted
      * @return a ResponseEntity
      */
     @CrossOrigin
     @PostMapping("/{username}")
-    public ResponseEntity<User> createKilterUser(@PathVariable String username){
-        if(username == null){
+    public ResponseEntity<User> createKilterUser(@PathVariable String username) {
+        if (username == null) {
             return ResponseEntity.badRequest().build();
         }
         User user = userService.createKilterUser(username);
-        if(user == null){
+        if (user == null) {
             return ResponseEntity.notFound().build();
         }
 
@@ -139,28 +147,39 @@ public class UserController {
 //    }
 
     /**
-     * Updates the grade and score of a specified user.
-     * @param username username of the user whose grade and score is to be updated
+     * Updates the score of a specified user.
+     *
+     * @param username username of the user whose score is to be updated
      * @return a ResponseEntity
      */
     @CrossOrigin
     @PatchMapping("/{username}/update")
-    public ResponseEntity<User> updateGradeAndScore(@PathVariable String username){
+    public ResponseEntity<User> updateScore(@PathVariable String username) {
         User update = userService.findByUsername(username);
-        if(update == null){
+        if (update == null) {
             return ResponseEntity.notFound().build();
         }
-        update = userService.updateGradeAndScore(update);
+        update = userService.updateScore(update);
         return ResponseEntity.ok(update);
     }
 
+    /**
+     * Updates the score of all users. <br>
+     * Doesn't update if the last update is less than 5 minutes ago.
+     *
+     * @return a ResponseEntity
+     */
     @CrossOrigin
     @PatchMapping("/update")
-    public ResponseEntity<String> update(){
-        for(User user : userService.findAll()){
-            user  = userService.updateGradeAndScore(user);
+    public ResponseEntity<String> update() {
+        if (lastUpdate.plusMinutes(5).isBefore(LocalDateTime.now())) {
+            for (User user : userService.findAll()) {
+                userService.updateScore(user);
+            }
+            lastUpdate = LocalDateTime.now();
+            return ResponseEntity.ok("ok");
         }
-        return ResponseEntity.ok("ok");
+        return ResponseEntity.badRequest().body("The last update was less than 5 minutes ago. Please try again later");
     }
 
 //    /**
@@ -179,14 +198,15 @@ public class UserController {
 
     /**
      * Retrieves a list of all friends of a specified user.
+     *
      * @param username username of the user whose friends are requested
      * @return A list of the usernames of all friends of the requested user.
      */
     @CrossOrigin
     @GetMapping("/friends/{username}")
-    public List<String> findAllFriendsFromUser(@PathVariable String username){
+    public List<String> findAllFriendsFromUser(@PathVariable String username) {
         User user = userService.findByUsername(username);
-        if(user == null) return List.of("This user is not on the leaderboard.");
+        if (user == null) return List.of("This user is not on the leaderboard.");
         return userService.getFriends(user);
     }
 
@@ -202,5 +222,21 @@ public class UserController {
 //        userService.insertFriends(user);
 //        return ResponseEntity.ok().build();
 //    }
+
+
+    /**
+     * Launches a new season. Grade and score of all users will be updated.
+     *
+     * @param start the start date of the new season
+     * @return a ResponseEntity
+     */
+    @CrossOrigin
+    @PatchMapping("/newSeason")
+    public ResponseEntity<LocalDateTime> newSeason(@RequestBody LocalDateTime start) {
+        if (start == null) return ResponseEntity.badRequest().build();
+        userService.newSeason(start);
+        return ResponseEntity.ok(start);
+    }
+
 
 }
