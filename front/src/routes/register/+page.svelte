@@ -19,7 +19,7 @@
     }
 
     async function postName() {
-        if (isFriend) {
+        if (isFriend && username.length > 0) {
             try {
                 const res = await fetch("localhost:8080/users/",
                     {method:"POST",
@@ -29,16 +29,21 @@
                      body: JSON.stringify({ username })
                     });
                 if (!res.ok) throw new Error("Failed to post name!");
+                else {
+                    buttonText = "Submit";
+                }
             } catch (error) {
                 console.error(error);
             }
             console.log("posted")
         } else {
             console.log("not friend")
+            buttonText = "Try again";
         }
     }
 
     $: isFriend = friends.has(username) || username === "";
+    let buttonText = "Submit";
 
     onMount(getFriends);
 </script>
@@ -47,7 +52,7 @@
 
 <div class="register">
     <h2 class="input-title"> Register for Leaderboard:</h2>
-    <div class="input-row">
+    <form class="input-row">
             <input
                 id="username"
                 type="text"
@@ -56,10 +61,10 @@
                 placeholder="Kilter Username"
             />
             <button class="register-submit"
-                    type="submit"
+                    type="reset"
                     on:click={postName}>
-                Submit
+                { buttonText }
             </button>
-    </div>
+    </form>
     <i class="friend_disc">If you want to join the board, you have to be a friend of somebody already on it.</i>
 </div>
