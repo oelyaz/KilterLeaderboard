@@ -1,0 +1,56 @@
+/* ====== Registration ====== */
+
+.register {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 12em;
+}
+
+.register .input-title {
+    font-size: 2em;
+    text-align: center;
+    color: #aec07c;
+}
+
+.register .friend_disc {
+    align-self: center;
+    justify-self: center;
+    padding: 1.5em;
+}
+
+.register .input-row {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+    align-items: center;
+    justify-content: center;
+    width: 40%;
+}
+
+.register .input-row {
+    text-align: center;
+    color: #ebdbb2;
+    font-family: "Fragile Bombers Attack", sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.register .input-row input {
+    background-color: #3c3836;
+    color: #ebdbb2;
+    border: 2px solid #7c6f64;
+    height: 2rem;
+    border-radius: 7px;
+    padding: 0.5rem;
+    width: 73%;
+    font-family: "Fragile Bombers Attack", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.register .input-row input:focus {
+    outline: none;
+    border-color: #aec07c;
+}

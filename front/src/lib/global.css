@@ -1,0 +1,149 @@
+/* ==============================
+   Gruvbox Dark Theme Styles
+   ============================== */
+
+/* ====== Global Styles ====== */
+html {
+    background-color: #282828;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Cpath d='M 0,10 Q 25,30 50,10' fill='transparent' stroke='%23606060' stroke-width='0.3'/%3E%3Cpath d='M 0,25 Q 25,45 50,25' fill='transparent' stroke='%23606060' stroke-width='0.3'/%3E%3Cpath d='M 0,40 Q 25,60 50,40' fill='transparent' stroke='%23606060' stroke-width='0.3'/%3E%3C/svg%3E");
+    background-size: 50px 50px;  /* Smaller, tighter grid */
+    background-repeat: repeat;
+    opacity: 1; /* Keep at 1 here, we'll adjust using ::before */
+    position: relative;
+    color: #928374;
+    font-family: "Fragile Bombers Attack", sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: inherit;
+    opacity: 0.01; /* Adjust for better visibility */
+    z-index: -1; /* Keeps it behind everything */
+}
+
+/* ====== Navigation Bar ====== */
+nav {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 80vw;
+    min-width: 300px;
+
+    background-color: #1d2021;
+    backdrop-filter: blur(10px);
+
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(7, 5, 5, 0.55);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allows items to move to a new line */
+    flex-direction: row;
+
+    z-index: 1000;
+}
+
+.navbar .heading {
+    color: #fb4934;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: "Fragile Bombers Attack", serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+}
+
+.navbar .buttons {
+    margin-left: auto;
+    display: flex;
+    padding-right: 0.5em;
+    gap: 0.5em;
+}
+
+.navbar .logo {
+    padding-left: 1em;
+}
+
+.navbar .logo img {
+    height: 4em; /* Adjust size */
+    width: auto;
+}
+
+/* Responsive adjustments for small screens */
+@media (max-width: 1100px) {
+    .navbar .heading {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 900px) {
+    nav {
+        padding-bottom: 4.5em;
+    }
+
+    .navbar .heading {
+        font-size: 2.5rem;
+        margin-top: 4em;
+    }
+
+    .navbar .logo {
+        padding-left: 0.5em;
+    }
+
+    .navbar .logo img {
+        height: 3em;
+    }
+
+    .navbar .buttons {
+        padding-right: 0.2em;
+    }
+}
+
+/* ====== Links ====== */
+a, .link {
+    font-size: 1.4rem;
+    text-decoration: none;
+}
+
+a {
+    color: #d65d0e;
+}
+
+a:hover {
+    background-color: #444;
+}
+
+.link {
+    color: #b8bb26;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+/* ====== Buttons ====== */
+button {
+    background-color: #a89984;
+    color: #ebdbb2;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+button:hover {
+    background-color: #aec07c;
+}
