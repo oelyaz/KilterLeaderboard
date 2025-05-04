@@ -177,6 +177,15 @@ public class UserService {
         return user;
     }
 
+    /**
+     * Updates the score of all users.
+     */
+    public void update(){
+        for (User user : findAll()) {
+            updateScore(user);
+        }
+    }
+
 
     /**
      * Launches a new season every january 1st and july 1st. <br>

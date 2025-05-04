@@ -27,13 +27,17 @@ public class UserController {
     }
 
     /**
-     * Returns a list of all users.
+     * Returns a list of all users. <br>
+     * Updates the score of all users if the last update is more than 5 minutes ago.
      *
      * @return a list of all users
      */
     @CrossOrigin
     @GetMapping("/")
     public List<User> findAll() {
+        if (lastUpdate.plusMinutes(5).isBefore(LocalDateTime.now())) {
+            update();
+        }
         return userService.findAll();
     }
 
@@ -173,9 +177,7 @@ public class UserController {
     @PatchMapping("/update")
     public ResponseEntity<String> update() {
         if (lastUpdate.plusMinutes(5).isBefore(LocalDateTime.now())) {
-            for (User user : userService.findAll()) {
-                userService.updateScore(user);
-            }
+            userService.update();
             lastUpdate = LocalDateTime.now();
             return ResponseEntity.ok("ok");
         }
