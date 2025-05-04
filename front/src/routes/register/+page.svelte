@@ -9,24 +9,24 @@
 
     async function getFriends() {
         try {
-            const res = await fetch("localhost:8080/friends/all/string");
+            const res = await fetch("http://localhost:8080/friends/allString");
             if (!res.ok) throw new Error("Failed to fetch Friends!");
             friends = new Set<string>(await res.json());
         } catch (error) {
             console.error(error);
         }
-        friends = new Set(["test"]);
+        console.log(friends);
     }
 
     async function postName() {
         if (isFriend && username.length > 0) {
             try {
-                const res = await fetch("localhost:8080/users/",
+                const res = await fetch("http://localhost:8080/users/" + username,
                     {method:"POST",
                      headers: {
                          "Content-Type": "application/json",
                      },
-                     body: JSON.stringify({ username })
+                      //body: JSON.stringify({ username })
                     });
                 if (!res.ok) throw new Error("Failed to post name!");
                 else {

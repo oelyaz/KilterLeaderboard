@@ -152,8 +152,8 @@ public class UserService implements IUserService{
             user.setGrade(0);
 
         }else{
-            user.setGrade(logbook.getLastDifficulty());
-            user.setScore(logbook.determineScore(logbook.getAverageTopDifficulty(10)));
+            user.setGrade(logbook.getAverageTopDifficulty(5));
+            user.setScore(logbook.determineScore(logbook.getAverageTopDifficulty(5)));
         }
         insertFriends(user);
         userRepository.save(user);
@@ -169,8 +169,8 @@ public class UserService implements IUserService{
     @Override
     public User updateGradeAndScore(User user){
         Logbook logbook = kilterApi.getLogBook(user.getKilterId());
-        user.setGrade(logbook.getLastDifficulty());
-        user.setScore(logbook.determineScore(logbook.getAverageTopDifficulty(10)));
+        user.setGrade(logbook.getAverageTopDifficulty(5));
+        user.setScore(logbook.determineScore(logbook.getAverageTopDifficulty(5)));
         userRepository.save(user);
         return user;
     }

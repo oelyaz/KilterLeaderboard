@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @Controller
 @RestController
 @RequestMapping("/users")
@@ -27,6 +28,7 @@ public class UserController {
      * Returns a list of all users.
      * @return a list of all users
      */
+    @CrossOrigin
     @GetMapping("/")
     public List<User> findAll(){
         return userService.findAll();
@@ -36,6 +38,7 @@ public class UserController {
      * Returns a list with the usernames of all users.
      * @return A list with the usernames of all users.
      */
+    @CrossOrigin
     @GetMapping("/allString")
     public Set<String> findAllString(){
         return userService.findAllString();
@@ -47,6 +50,7 @@ public class UserController {
      * @param username username of the requested user
      * @return the requested user
      */
+    @CrossOrigin
     @GetMapping("/{username}")
     public User findByUsername(@PathVariable String username){
         return userService.findByUsername(username);
@@ -57,6 +61,7 @@ public class UserController {
      * @param id id (not kilterId) of the requested user
      * @return the requested user
      */
+    @CrossOrigin
     @GetMapping("/id/{id}")
     public User findById(@PathVariable Integer id){
         return userService.findById(id);
@@ -67,6 +72,7 @@ public class UserController {
      * @param kilterId kilterId of the requested user
      * @return the requested user
      */
+    @CrossOrigin
     @GetMapping("/kilterId/{kilterId}")
     public User findByKilterId(@PathVariable String kilterId){
         return userService.findByKilterId(kilterId);
@@ -99,6 +105,7 @@ public class UserController {
      * @param username username of the user to be inserted
      * @return a ResponseEntity
      */
+    @CrossOrigin
     @PostMapping("/{username}")
     public ResponseEntity<User> createKilterUser(@PathVariable String username){
         if(username == null){
@@ -136,6 +143,7 @@ public class UserController {
      * @param username username of the user whose grade and score is to be updated
      * @return a ResponseEntity
      */
+    @CrossOrigin
     @PatchMapping("/{username}/update")
     public ResponseEntity<User> updateGradeAndScore(@PathVariable String username){
         User update = userService.findByUsername(username);
@@ -144,6 +152,15 @@ public class UserController {
         }
         update = userService.updateGradeAndScore(update);
         return ResponseEntity.ok(update);
+    }
+
+    @CrossOrigin
+    @PatchMapping("/update")
+    public ResponseEntity<String> update(){
+        for(User user : userService.findAll()){
+            user  = userService.updateGradeAndScore(user);
+        }
+        return ResponseEntity.ok("ok");
     }
 
 //    /**
@@ -165,6 +182,7 @@ public class UserController {
      * @param username username of the user whose friends are requested
      * @return A list of the usernames of all friends of the requested user.
      */
+    @CrossOrigin
     @GetMapping("/friends/{username}")
     public List<String> findAllFriendsFromUser(@PathVariable String username){
         User user = userService.findByUsername(username);

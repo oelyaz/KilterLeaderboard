@@ -178,7 +178,7 @@ public class KilterApi {
             e.printStackTrace();
             return null;
         }
-        System.out.println(response.statusCode());
+        //System.out.println(response.statusCode());
 
         try {
             return new Logbook(new JSONObject(response.body()).getJSONArray("logbook"));

@@ -57,19 +57,18 @@ public class Climb {
 
         int diff = difficulty - userGrade;
 
-        if(diff >= 4) return 222;
-        if(diff <= -6) return 1;
+        if(diff >= 4) return 2000;
+        if(diff <= -5) return 5;
 
         return switch (diff){
-            case 3 -> 185;
-            case 2 -> 150;
-            case 1 -> 120;
-            case 0 -> 100;
-            case -1 -> 90;
+            case 3 -> 2000;
+            case 2 -> 1450;
+            case 1 -> 700;
+            case 0 -> 400;
+            case -1 -> 200;
             case -2 -> 75;
-            case -3 -> 55;
-            case -4 -> 22;
-            case -5 -> 11;
+            case -3 -> 35;
+            case -4 -> 15;
             default -> 0;
         };
     }

@@ -20,6 +20,7 @@
         } catch (error) {
             console.error(error);
         }
+        console.log(leaderboard);
         leaderboard.sort((a: Climber, b: Climber) => b.score - a.score);
     }
 
@@ -39,7 +40,7 @@
         {#each leaderboard as player, index}
             <tr>
                 <td>{index+1}</td>
-                <td>{player.name}</td>
+                <td>{player.username}</td>
                 <td>{player.grade}</td>
                 <td>{player.score}</td>
             </tr>

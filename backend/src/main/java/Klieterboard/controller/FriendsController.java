@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+@CrossOrigin(origins = "http://localhost:5173")
 @Controller
 @RestController
 @RequestMapping("/friends")
@@ -25,6 +26,7 @@ public class FriendsController {
      * Returns a list of all friends.
      * @return A list of all friends.
      */
+    @CrossOrigin
     @GetMapping("/")
     public List<Friends> findAll(){
         return friendsService.findAll();
@@ -34,6 +36,7 @@ public class FriendsController {
      * Returns a list of the usernames of all friends.
      * @return A list of the usernames of all friends.
      */
+    @CrossOrigin
     @GetMapping("/allString")
     public Set<String> findAllString(){
         return friendsService.findAllString();
@@ -44,6 +47,7 @@ public class FriendsController {
      * @param username username of the requested friend
      * @return The requested friend.
      */
+    @CrossOrigin
     @GetMapping("/{username}")
     public Friends findByUsername(@PathVariable String username){
         return friendsService.findByUsername(username);
