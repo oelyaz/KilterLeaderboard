@@ -44,7 +44,7 @@
     height: 2rem;
     border-radius: 7px;
     padding: 0.5rem;
-    width: 73%;
+    width: 75%;
     font-family: "Noto Sans", sans-serif;
     font-size: 1.5rem;
     font-weight: 600;
@@ -53,4 +53,14 @@
 .register .input-row input:focus {
     outline: none;
     border-color: #aec07c;
+}
+
+@media (max-width: 800px) {
+    .register .input-row {
+        flex-direction: column;
+    }
+
+    .register .input-row input{
+        width: 160%;
+    }
 }
