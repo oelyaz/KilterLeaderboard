@@ -11,6 +11,7 @@
     };
 
     let leaderboard: Climber[] = [];
+    let updated: boolean = false;
 
     async function fetchLeaderboard() {
         try {
@@ -20,11 +21,22 @@
         } catch (error) {
             console.error(error);
         }
-        console.log(leaderboard);
         leaderboard.sort((a: Climber, b: Climber) => b.score - a.score);
+        if ( !updated ) {
+            updated = true;
+            const updateTimeout = setTimeout(() => {
+                fetchLeaderboard();
+                clearTimeout(updateTimeout);
+            }, 7000);
+        }
     }
-    function difficultyInFbScala(difficulty) {
-        const mapping = {
+
+    interface Dictionary<T> {
+        [key: number]: T;
+    }
+
+    function difficultyInFbScala(difficulty: number) {
+        const mapping: Dictionary<String> = {
             10: '4a',
             11: '4b',
             12: '4c',
@@ -62,7 +74,7 @@
         <tr>
             <th>Rank</th>
             <th>Name</th>
-            <th>Grade</th>
+            <th>Level</th>
             <th>Score</th>
         </tr>
     </thead>

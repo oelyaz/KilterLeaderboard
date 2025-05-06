@@ -15,7 +15,6 @@
         } catch (error) {
             console.error(error);
         }
-        console.log(friends);
     }
 
     async function postName() {
