@@ -122,13 +122,18 @@ public class Logbook {
     /**
      * Calculates the average difficulty of the x hardest boulders.
      * @param topXClimbs  the amount of boulders to be considered
-     * @return The average difficulty. <br> If there are no ascents {@code -1} is returned
+     * @return The average difficulty.
+     *  If there are less than x ascents, the highest difficulty in the climber's logbook is returned.
+     * <br> If there are no ascents {@code -1} is returned
      */
     public int getAverageTopDifficulty(int topXClimbs){
         double sum = 0;
         List<Integer> list = determineTopDifficulties(topXClimbs);
         if(list.isEmpty()){
             return -1;
+        }
+        if(list.size() < topXClimbs){
+            return getMaxDifficulty();
         }
         for( int grade :  list){
             sum += grade;
@@ -143,6 +148,9 @@ public class Logbook {
      */
     public int determineScore(int userGrade){
         int score = 0;
+        if(userGrade == -1 ){
+            return 0;
+        }
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
         for (int i = 0; i < logbook.length(); i++) {
