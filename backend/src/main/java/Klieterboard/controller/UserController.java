@@ -35,9 +35,6 @@ public class UserController {
     @CrossOrigin
     @GetMapping("/")
     public List<User> findAll() {
-        if (lastUpdate.plusMinutes(5).isBefore(LocalDateTime.now())) {
-            update();
-        }
         return userService.findAll();
     }
 
@@ -179,7 +176,7 @@ public class UserController {
         if (lastUpdate.plusMinutes(5).isBefore(LocalDateTime.now())) {
             userService.update();
             lastUpdate = LocalDateTime.now();
-            return ResponseEntity.ok("ok");
+            return ResponseEntity.ok("Updated.");
         }
         return ResponseEntity.badRequest().body("The last update was less than 5 minutes ago. Please try again later");
     }

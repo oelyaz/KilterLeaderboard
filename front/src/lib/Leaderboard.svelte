@@ -25,9 +25,20 @@
         if ( !updated ) {
             updated = true;
             const updateTimeout = setTimeout(() => {
-                fetchLeaderboard();
+                //fetchLeaderboard();
+                updateLeaderboard();
                 clearTimeout(updateTimeout);
             }, 7000);
+        }
+    }
+
+    async function updateLeaderboard(){
+        try{
+            const res = await fetch("http://localhost:8080/users/update", {method: "PATCH"});
+            if (!res.ok) console.log("The last update was less than 5 minutes ago");
+            await fetchLeaderboard();
+        } catch (error) {
+            console.log(error)
         }
     }
 
