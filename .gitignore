@@ -1,6 +1,7 @@
 backend/src/main/resources/credentials.properties
 backend/src/main/resources/static/
 /backend/target/classes/credentials.properties
+backend/target/
 /.idea/
 .idea/
 front/node_modules
