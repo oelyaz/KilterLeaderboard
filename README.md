@@ -3,12 +3,13 @@ A leaderboard for the Kilter bouldering board.
 
 ## Description
 
-Users are ranked according to their performance, but the scoring is adapted to the strength of the user. <br>
+Users are ranked according to their performance, but the scoring is adapted to the skill of the user. <br>
 In order to be on the leaderboard, you must have a public Kilter account and be friends with a person on the leaderboard.
 ## Visuals
 
 ### Leaderboard
-The grade indicates the average of the user's five most difficult boulders. The score calculation is based on that value. It is calculated using only the boulders climbed in the current year.
+The skill indicates the average of the user's five most difficult boulders. The score calculation is based on that value. The score is calculated using only the boulders climbed in the current season.
+<br> A new seasons beginns on January 1st und July 1st.
 
 ![Leaderboard.png](Leaderboard.png)
 
