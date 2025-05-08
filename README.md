@@ -1,3 +1,4 @@
+[![Build and Push Docker Image](https://github.com/oelyaz/KlieterBoard/actions/workflows/docker-image.yml/badge.svg?branch=main)](https://github.com/oelyaz/KlieterBoard/actions/workflows/docker-image.yml)
 # Kilter Leaderboard
 A leaderboard for the Kilter bouldering board.
 
