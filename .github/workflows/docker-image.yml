@@ -24,7 +24,7 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
       with:
-        platform: linux/arm64/v8
+        platforms: linux/arm64/v8
         context: .
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/kilterleaderboard:latest
