@@ -1,6 +1,6 @@
 package Klieterboard.service;
 
-import Klieterboard.entity.Friends;
+import Klieterboard.entity.*;
 import Klieterboard.repository.IFriendsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,10 +11,12 @@ import java.util.*;
 public class FriendsService {
 
     private final IFriendsRepository friendsRepository;
+    private final UserService userService;
 
     @Autowired
-    public FriendsService(IFriendsRepository friendsService) {
+    public FriendsService(IFriendsRepository friendsService, UserService userService) {
         this.friendsRepository = friendsService;
+        this.userService = userService;
     }
 
     /**
@@ -86,5 +88,14 @@ public class FriendsService {
      */
     public Friends insertFriends(Friends friend) {
         return friendsRepository.save(friend);
+    }
+
+    /**
+     * Updates the friends of all users.
+     */
+    public void update() {
+        for( User u: userService.findAll()){
+            userService.insertFriends(u);
+        }
     }
 }

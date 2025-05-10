@@ -2,11 +2,13 @@ package Klieterboard.controller;
 
 import Klieterboard.entity.Friends;
 import Klieterboard.service.FriendsService;
+import Klieterboard.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 @CrossOrigin(origins = "http://localhost:5173")
@@ -16,6 +18,7 @@ import java.util.*;
 public class FriendsController {
 
     private final FriendsService friendsService;
+    private static LocalDateTime lastUpdate = LocalDateTime.now().minusMinutes(40);
 
     @Autowired
     public FriendsController(FriendsService friendsService) {
@@ -51,6 +54,23 @@ public class FriendsController {
     @GetMapping("/{username}")
     public Friends findByUsername(@PathVariable String username){
         return friendsService.findByUsername(username);
+    }
+
+    /**
+     * Updates the friends database.
+     * Doesn't update if the last update is less than 5 minutes ago.
+     *
+     * @return a ResponseEntity
+     */
+    @CrossOrigin
+    @PatchMapping("/update")
+    public ResponseEntity<String> update() {
+        if (lastUpdate.plusMinutes(30).isBefore(LocalDateTime.now())) {
+            friendsService.update();
+            lastUpdate = LocalDateTime.now();
+            return ResponseEntity.ok("Updated.");
+        }
+        return ResponseEntity.badRequest().body("The last update was less than 5 minutes ago. Please try again later");
     }
 
 //    /**
