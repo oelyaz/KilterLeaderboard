@@ -18,18 +18,17 @@ jobs:
         node-version: '20'
 
     - name: Install npm dependencies
-      run: |
-        cd front
-        npm install
+      working-directory: ./front
+      run: npm install
 
     - name: Build npm project
+      working-directory: ./front
       run: npm run build
 
     - name: Move build files to Spring Boot static directory
       run: |
-        mkdir -p ../backend/src/main/resources/static
-        mv build/* ../backend/src/main/resources/static/
-        cd ..
+        mkdir -p backend/src/main/resources/static
+        mv front/build/* backend/src/main/resources/static/
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
