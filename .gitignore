@@ -13,7 +13,7 @@ front/node_modules
 .wrangler
 front/.svelte-kit/
 /build
-
+front/build/
 # OS
 .DS_Store
 Thumbs.db

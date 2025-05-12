@@ -12,6 +12,7 @@
 
     let leaderboard: Climber[] = [];
     let updated: boolean = false;
+    let loading: boolean = true;
 
     async function fetchLeaderboard() {
         try {
@@ -22,6 +23,7 @@
             console.error(error);
         }
         leaderboard.sort((a: Climber, b: Climber) => b.score - a.score);
+        loading = false;
         if ( !updated ) {
             updated = true;
             const updateTimeout = setTimeout(() => {
@@ -80,28 +82,40 @@
     onMount(fetchLeaderboard);
 </script>
 
-<table>
-    <thead>
-        <tr>
-            <th>Rank</th>
-            <th>Name</th>
-            <th>Level</th>
-            <th>Score</th>
-        </tr>
-    </thead>
-    <tbody>
-        {#each leaderboard as player, index}
-            <tr>
-                <td>{index+1}</td>
-                <td>{player.username}</td>
-                <td>{difficultyInFbScala(player.grade)}</td>
-                <td>{player.score}</td>
-            </tr>
-        {/each}
-    </tbody>
-</table>
+<div>
+    {#if loading}
+        <h4>Loading...</h4>
+    {:else}
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Name</th>
+                    <th>Level</th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {#each leaderboard as player, index}
+                    <tr>
+                        <td>{index+1}</td>
+                        <td>{player.username}</td>
+                        <td>{difficultyInFbScala(player.grade)}</td>
+                        <td>{player.score}</td>
+                    </tr>
+                {/each}
+            </tbody>
+        </table>
+    {/if}
+</div>
 
 <style>
+    h4 {
+        align-content: center;
+        text-align: center;
+        margin: 13em auto;
+    }
+
     table {
         width: 100%;
         border-collapse: collapse;

@@ -4,6 +4,8 @@
     import "./page.css"
     import {onMount} from "svelte";
 
+    export const prerender = true;
+
     let username: string="";
     let friends: Set<string> = new Set();
 
