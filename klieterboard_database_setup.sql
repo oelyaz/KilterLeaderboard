@@ -1,6 +1,6 @@
 CREATE DATABASE klieterboard;
 
-CREATE TABLE kilterleaderboard.user (
+CREATE TABLE klieterboard.user (
 
 	id integer UNIQUE NOT NULL,
 	kilter_id integer UNIQUE NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE kilterleaderboard.user (
 	PRIMARY KEY (id)
 );
 	
-CREATE TABLE kilterleaderboard.friends (
+CREATE TABLE klieterboard.friends (
 
 	id integer UNIQUE NOT NULL,
 	username varchar(255) UNIQUE NOT NULL,
