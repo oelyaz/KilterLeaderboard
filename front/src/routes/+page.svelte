@@ -7,5 +7,9 @@
     export const prerender = true;
 </script>
 
+<svelte:head>
+    <title>Kilter-Leaderboard</title>
+</svelte:head>
+
 <Navbar />
 <Leaderboard />

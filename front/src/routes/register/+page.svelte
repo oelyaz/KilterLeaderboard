@@ -49,6 +49,10 @@
     onMount(getFriends);
 </script>
 
+<svelte:head>
+    <title>Kilter-Leaderboard</title>
+</svelte:head>
+
 <Navbar />
 
 <div class="register">

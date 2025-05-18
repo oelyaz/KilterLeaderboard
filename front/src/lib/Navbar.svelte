@@ -19,10 +19,10 @@
     <h1 class="heading">Kilter Leaderboard</h1>
     <div class="buttons">
         <button on:click={navigate_leaderboard}>
-            <img src="node_modules/lucide-static/icons/medal.svg" alt="Leaderboard">
+            <img src="/medal.svg" alt="Leaderboard">
         </button>
         <button on:click={navigate_register}>
-            <img src="node_modules/lucide-static/icons/circle-plus.svg" alt="Register">
+            <img src="/circle-plus.svg" alt="Register">
         </button>
     </div>
 </nav>
