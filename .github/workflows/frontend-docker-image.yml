@@ -26,6 +26,6 @@ jobs:
         with:
           platforms: linux/arm64/v8
           context: .
-          file: KlieterBoard/front/Dockerfile
+          file: ./front/Dockerfile
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/kilterleaderboard_front:latest
