@@ -11,7 +11,7 @@
 
     async function getFriends() {
         try {
-            const res = await fetch("http://localhost:8080/friends/allString");
+            const res = await fetch("https://api.kilterleaderboard.de/friends/allString");
             if (!res.ok) throw new Error("Failed to fetch Friends!");
             friends = new Set<string>(await res.json());
         } catch (error) {
@@ -22,7 +22,7 @@
     async function postName() {
         if (isFriend && username.length > 0) {
             try {
-                const res = await fetch("http://localhost:8080/users/" + username,
+                const res = await fetch("https://api.kilterleaderboard.de/users/" + username,
                     {method:"POST",
                      headers: {
                          "Content-Type": "application/json",

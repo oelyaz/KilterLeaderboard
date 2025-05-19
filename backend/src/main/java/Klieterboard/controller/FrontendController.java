@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://kilterleaderboard.de")
 @Controller
 @RestController
 @RequestMapping(path = "/")
@@ -22,7 +22,7 @@ public class FrontendController {
     @RequestMapping(value = {"", "register"})
     public RedirectView index() {
         RedirectView redirectView = new RedirectView();
-        redirectView.setUrl("http://localhost:3000");
+        redirectView.setUrl("https://kilterleaderboard.de");
         return redirectView;
     }
 }

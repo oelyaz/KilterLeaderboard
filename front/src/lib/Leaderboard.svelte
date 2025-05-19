@@ -16,7 +16,7 @@
 
     async function fetchLeaderboard() {
         try {
-            const res = await fetch("http://localhost:8080/users/");
+            const res = await fetch("https://api.kilterleaderboard.de/users/");
             if (!res.ok) throw new Error("Failed to fetch Leaderboard!");
             leaderboard = await res.json();
         } catch (error) {
@@ -36,7 +36,7 @@
 
     async function updateLeaderboard(){
         try{
-            const res = await fetch("http://localhost:8080/users/update", {method: "PATCH"});
+            const res = await fetch("https://api.kilterleaderboard.de/users/update", {method: "PATCH"});
             if (!res.ok) console.log("The last update was less than 5 minutes ago");
             await fetchLeaderboard();
         } catch (error) {
