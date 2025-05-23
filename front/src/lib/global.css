@@ -112,6 +112,29 @@ nav {
     }
 }
 
+@media (max-width: 470px) {
+    nav {
+        padding-bottom: 4.5em;
+    }
+
+    .navbar .heading {
+        font-size: 2rem;
+        margin-top: 5em;
+    }
+
+    .navbar .logo {
+        padding-left: 0.1em;
+    }
+
+    .navbar .logo img {
+        height: 2.5em;
+    }
+
+    .navbar .buttons {
+        padding-right: 0.1em;
+    }
+}
+
 /* ====== Links ====== */
 a, .link {
     font-size: 1.4rem;
