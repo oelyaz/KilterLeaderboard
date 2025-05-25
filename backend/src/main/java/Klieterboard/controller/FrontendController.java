@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
 
-@CrossOrigin(origins = "https://kilterleaderboard.de")
+@CrossOrigin(origins = "*")
 @Controller
 @RestController
 @RequestMapping(path = "/")
