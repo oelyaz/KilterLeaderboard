@@ -1,5 +1,7 @@
-[![Build and Push Docker Image](https://github.com/oelyaz/KlieterBoard/actions/workflows/docker-image.yml/badge.svg?branch=main)](https://github.com/oelyaz/KlieterBoard/actions/workflows/docker-image.yml)
+[![Build and Push Docker Image](https://github.com/oelyaz/KlieterBoard/actions/workflows/backend-docker-image.yml/badge.svg?branch=main)](https://github.com/oelyaz/KlieterBoard/actions/workflows/backend-docker-image.yml)
+[![Build and Push Docker Image](https://github.com/oelyaz/KlieterBoard/actions/workflows/frontend-docker-image.yml/badge.svg?branch=main)](https://github.com/oelyaz/KlieterBoard/actions/workflows/frontend-docker-image.yml)
 # Kilter Leaderboard
+[kilterleaderboard.de](https://kilterleaderboard.de/)
 A leaderboard for the Kilter bouldering board.
 
 ## Description
@@ -30,8 +32,8 @@ Support for thin window sizes is included.
   <img src="https://contrib.rocks/image?repo=oelyaz/klieterboard" alt="contrib.rocks image" />
 </a>
 
-[@oelyaz](https://github.com/oelyaz) mainly frontend <br>
-[@zebraschmetterling](https://github.com/zebraschmetterling) mainly backend 
+[@oelyaz](https://github.com/oelyaz) mostly frontend and deployment<br>
+[@zebraschmetterling](https://github.com/zebraschmetterling) mostly backend 
 
 
 
