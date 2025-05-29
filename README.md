@@ -1,7 +1,7 @@
 [![Build and Push Docker Image](https://github.com/oelyaz/KlieterBoard/actions/workflows/backend-docker-image.yml/badge.svg?branch=main)](https://github.com/oelyaz/KlieterBoard/actions/workflows/backend-docker-image.yml)
 [![Build and Push Docker Image](https://github.com/oelyaz/KlieterBoard/actions/workflows/frontend-docker-image.yml/badge.svg?branch=main)](https://github.com/oelyaz/KlieterBoard/actions/workflows/frontend-docker-image.yml)
 # Kilter Leaderboard
-[kilterleaderboard.de](https://kilterleaderboard.de/)
+[kilterleaderboard.de](https://kilterleaderboard.de/)<br>
 A leaderboard for the Kilter bouldering board.
 
 ## Description

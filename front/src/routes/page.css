@@ -10,6 +10,20 @@ table {
     color: #ebdbb2;
 }
 
+.comment {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.comment .points_info {
+    text-align: center;
+}
+
 @media (max-width: 1100px) {
     table {
         margin: 13em auto;
