@@ -164,27 +164,30 @@ public class KilterApi {
      * @return a Logbook object. <br> If the user is not found or there was an error, {@code null} is returned.
      */
     public Logbook getLogBook(String id){
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(baseUrl + "/users/"+id+"/logbook?types=ascent"))
-                .GET()
-                .header("Cookie", "PHPSESSID=8fql4sa3tmi6nmu4uviuj5eesl")
-                .header("Cookie", "token="+token)
-                .header("Content-Type", "application/json")
-                .build();
-        HttpResponse<String> response;
-        try{
-            response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-            return null;
-        }
-        //System.out.println(response.statusCode());
+        for (int i = 0; i < 5; i++) {
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(baseUrl + "/users/"+id+"/logbook?types=ascent"))
+                    .GET()
+                    .header("Cookie", "PHPSESSID=8fql4sa3tmi6nmu4uviuj5eesl")
+                    .header("Cookie", "token="+token)
+                    .header("Content-Type", "application/json")
+                    .build();
+            HttpResponse<String> response;
+            try{
+                response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+                continue;
+            }
+            //System.out.println(response.statusCode());
 
-        try {
-            return new Logbook(new JSONObject(response.body()).getJSONArray("logbook"));
-        } catch (JSONException e) {
-            return null;
+            try {
+                return new Logbook(new JSONObject(response.body()).getJSONArray("logbook"));
+            } catch (JSONException e) {
+                continue;
+            }
         }
+        return null;
     }
 
 
