@@ -159,7 +159,8 @@ public class KilterApi {
     }
 
     /**
-     * Gets logbook from climber with the given id. Gets only ascents no bids.
+     * Gets logbook from climber with the given id. Gets only ascents no bids. <br>
+     * If there occurs an error getting the logbook, it will try again. If after 5 tries there is still no result, null is returned.
      * @param id KilterId of the user whose logbook is requested
      * @return a Logbook object. <br> If the user is not found or there was an error, {@code null} is returned.
      */

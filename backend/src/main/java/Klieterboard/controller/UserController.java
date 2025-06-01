@@ -19,7 +19,7 @@ import java.util.*;
 public class UserController {
 
     private final UserService userService;
-    private static LocalDateTime lastUpdate = LocalDateTime.now();
+    private static LocalDateTime lastUpdate = LocalDateTime.now().minusMinutes(10);
 
     @Autowired
     public UserController(UserService userService) {

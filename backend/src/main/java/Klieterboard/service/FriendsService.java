@@ -3,6 +3,7 @@ package Klieterboard.service;
 import Klieterboard.entity.*;
 import Klieterboard.repository.IFriendsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -91,8 +92,9 @@ public class FriendsService {
     }
 
     /**
-     * Updates the friends of all users.
+     * Updates the friends of all users. Will update each hour.
      */
+    @Scheduled(cron = "0 0 * * * *")
     public void update() {
         for( User u: userService.findAll()){
             userService.insertFriends(u);

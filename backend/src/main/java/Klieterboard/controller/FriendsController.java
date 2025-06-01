@@ -58,7 +58,7 @@ public class FriendsController {
 
     /**
      * Updates the friends database.
-     * Doesn't update if the last update is less than 5 minutes ago.
+     * Doesn't update if the last update is less than 30 minutes ago.
      *
      * @return a ResponseEntity
      */
@@ -70,7 +70,7 @@ public class FriendsController {
             lastUpdate = LocalDateTime.now();
             return ResponseEntity.ok("Updated.");
         }
-        return ResponseEntity.badRequest().body("The last update was less than 5 minutes ago. Please try again later");
+        return ResponseEntity.badRequest().body("The last update was less than 30 minutes ago. Please try again later");
     }
 
 //    /**
