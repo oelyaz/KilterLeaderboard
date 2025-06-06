@@ -122,17 +122,18 @@ public class Logbook {
     /**
      * Calculates the average difficulty of the x hardest boulders.
      * @param topXClimbs  the amount of boulders to be considered
+     * @param minimum the minimal amount of boulder needed for averageTop difficulty
      * @return The average difficulty.
-     *  If there are less than x ascents, the highest difficulty in the climber's logbook is returned.
+     *  If there are less than {@code minimum} ascents, the highest difficulty in the climber's logbook is returned.
      * <br> If there are no ascents {@code -1} is returned
      */
-    public int getAverageTopDifficulty(int topXClimbs){
+    public int getAverageTopDifficulty(int topXClimbs, int minimum){
         double sum = 0;
         List<Integer> list = determineTopDifficulties(topXClimbs);
         if(list.isEmpty()){
             return -1;
         }
-        if(list.size() < topXClimbs){
+        if(list.size() < minimum){
             return getMaxDifficulty();
         }
         for( int grade :  list){

@@ -155,7 +155,7 @@ public class UserService {
             user.setGrade(0);
 
         } else {
-            user.setGrade(logbook.getAverageTopDifficulty(5));
+            user.setGrade(logbook.getAverageTopDifficulty(5, 10));
             user.setScore(logbook.determineScore(user.getGrade()));
         }
         insertFriends(user);
@@ -205,7 +205,7 @@ public class UserService {
         for (User user : findAll()) {
             Logbook logbook = kilterApi.getLogBook(user.getKilterId());
             if (logbook != null) {
-                user.setGrade(logbook.getAverageTopDifficulty(5));
+                user.setGrade(logbook.getAverageTopDifficulty(5, 10));
                 user.setScore(logbook.determineScore(user.getGrade()));
             } else {
                 user.setScore(0);
