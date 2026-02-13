@@ -167,7 +167,7 @@ public class KilterApi {
     public Logbook getLogBook(String id){
         for (int i = 0; i < 5; i++) {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(baseUrl + "/users/"+id+"/logbook?types=ascent"))
+                    .uri(URI.create(baseUrl + "/users/"+id+"/logbook?types=ascent,bid"))
                     .GET()
                     .header("Cookie", "PHPSESSID=8fql4sa3tmi6nmu4uviuj5eesl")
                     .header("Cookie", "token="+token)
@@ -231,18 +231,21 @@ public class KilterApi {
      */
     public void logOut(){
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://kilterboardapp.com/sessions/"+ token))
-                .DELETE()
+                .uri(URI.create("https://kilterboardapp.com/sessions/delete"))
                 .header("Cookie", "PHPSESSID=v328j3dchjemljsh4ns339fubq")
                 .header("Authorization", "Bearer " + token)
+                .POST(HttpRequest.BodyPublishers.ofString(
+                "{"
+                        + "\"ua\": \"app\", "
+                        + "\"token\": \"" + token +"\""
+                        + "}"
+                ))
                 .build();
-        HttpResponse<String> response;
         try{
-            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            client.send(request, HttpResponse.BodyHandlers.ofString());
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 
 }
