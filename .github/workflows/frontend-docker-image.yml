@@ -24,7 +24,6 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5
         with:
-          platforms: linux/arm64/v8
           context: ./front
           file: ./front/Dockerfile
           push: true
