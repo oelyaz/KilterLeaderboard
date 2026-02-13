@@ -1,0 +1,35 @@
+opencollection: 1.0.0
+
+info:
+  name: kilterboard-app
+config:
+  proxy:
+    inherit: true
+    config:
+      protocol: http
+      hostname: ""
+      port: ""
+      auth:
+        username: ""
+        password: ""
+      bypassProxy: ""
+
+request:
+  auth:
+    type: basic
+    username: oelyaz
+    password: esa1jt@kilter
+  variables:
+    - name: url
+      value: https://kilterboardapp.com
+    - name: user_id
+      value: "182745"
+    - name: token
+      value: token={{raw_token}}
+    - name: raw_token
+      value: "{{raw_token}}"
+bundled: false
+extensions:
+  ignore:
+    - node_modules
+    - .git

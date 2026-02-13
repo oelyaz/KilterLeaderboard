@@ -1,0 +1,25 @@
+info:
+  name: get-climb-info
+  type: http
+  seq: 6
+
+http:
+  method: GET
+  url: "{{url}}/climbs/{{climb_id}}/info?angle=30&_version=2"
+  headers:
+    - name: Cookie
+      value: "{{token}}"
+  params:
+    - name: angle
+      value: "30"
+      type: query
+    - name: _version
+      value: "2"
+      type: query
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

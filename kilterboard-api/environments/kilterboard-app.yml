@@ -1,0 +1,8 @@
+name: kilterboard-app
+variables:
+  - name: user
+    value: oelyaz
+  - secret: true
+    name: password
+  - secret: true
+    name: raw_token

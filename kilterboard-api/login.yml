@@ -1,0 +1,41 @@
+info:
+  name: login
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{url}}/sessions"
+  body:
+    type: form-urlencoded
+    data:
+      - name: username
+        value: "{{user}}"
+      - name: password
+        value: "{{password}}"
+      - name: tou
+        value: accepted
+      - name: pp
+        value: accepted
+      - name: ua
+        value: app
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        const token = res.body.session.token;
+
+        if (token) {
+            bru.setEnvVar("raw_token", token);
+            
+            console.log("Success! Saved raw_token:", token);
+        } else {
+            console.warn("Token not found in response. Check the structure.");
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
