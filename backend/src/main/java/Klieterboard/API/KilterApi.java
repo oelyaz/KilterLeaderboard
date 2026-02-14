@@ -71,7 +71,6 @@ public class KilterApi {
         } catch (JSONException e) {
             System.out.println("token not available, JSON Exception "+e);
         }
-        System.out.println("New Cookies:" + this.sessionCookie + "; token=" + this.token);
     }
     
     /**
@@ -175,7 +174,7 @@ public class KilterApi {
         String cookieHeader = this.sessionCookie + "; token=" + this.token;
         for (int i = 0; i < 5; i++) {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(baseUrl + "/users/"+id+"/logbook?types=ascent"))
+                    .uri(URI.create(baseUrl + "/users/"+id+"/logbook?types=ascent,bid"))
                     .GET()
                     .header("Cookie", cookieHeader)
                     .header("Content-Type", "application/json")
@@ -184,13 +183,10 @@ public class KilterApi {
             HttpResponse<String> response;
             try{
                 response = client.send(request, HttpResponse.BodyHandlers.ofString());
-                System.out.println(response);
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
                 continue;
             }
-            //System.out.println(response.statusCode());
-
             try {
                 return new Logbook(new JSONObject(response.body()).getJSONArray("logbook"));
             } catch (JSONException e) {
