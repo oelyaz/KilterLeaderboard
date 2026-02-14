@@ -184,6 +184,7 @@ public class KilterApi {
             HttpResponse<String> response;
             try{
                 response = client.send(request, HttpResponse.BodyHandlers.ofString());
+                System.out.println(response);
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
                 continue;
