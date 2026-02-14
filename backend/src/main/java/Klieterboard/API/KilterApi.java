@@ -21,6 +21,7 @@ public class KilterApi {
 
     @Getter
     private String token;
+    private String sessionCookie;
 
     private final String baseUrl;
 
@@ -41,19 +42,17 @@ public class KilterApi {
      * Determines the session token. Used to Log in.
      */
     public void determineToken(){
+        String formPayload = "username=" + kilter_username +
+                "&password=" + kilter_password +
+                "&tou=accepted" +
+                "&pp=accepted" +
+                "&ua=app";
+
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(baseUrl + "/sessions"))
-                .header("Cookie", "PHPSESSID=v328j3dchjemljsh4ns339fubq")
-                .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(
-                        "{"
-                                + "\"password\": \"" + kilter_password +"\", "
-                                + "\"pp\" : \"accepted\", "
-                                + "\"tou\": \"accepted\", "
-                                + "\"ua\": \"app\", "
-                                + "\"username\": \"" +kilter_username +"\""
-                                + "}"
-                ))
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .header("User-Agent", "Kilter Board/2.6.5 (android; Android 14; Scale/2.0)")
+                .POST(HttpRequest.BodyPublishers.ofString(formPayload))
                 .build();
         HttpResponse<String> response;
         try{
@@ -62,6 +61,11 @@ public class KilterApi {
             e.printStackTrace();
             return;
         }
+
+        this.sessionCookie = response.headers().firstValue("Set-Cookie")
+                .map(cookie -> cookie.split(";")[0])
+                .orElse("PHPSESSID=v328j3dchjemljsh4ns339fubq");
+
         try {
             token =  new JSONObject(response.body()).getJSONObject("session").getString("token");
         } catch (JSONException e) {
@@ -77,12 +81,13 @@ public class KilterApi {
      * <br> If the user is not found or there was an error, {@code null} is returned.
      */
     public User searchUser(String username){
+        String cookieHeader = this.sessionCookie + "; token=" + this.token;
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(baseUrl + "/explore?q="+username+"&t=user"))
                 .GET()
-                .header("Cookie", "PHPSESSID=v328j3dchjemljsh4ns339fubq")
-                .header("Cookie", "token="+token)
+                .header("Cookie", cookieHeader)
                 .header("Content-Type", "application/json")
+                .header("User-Agent", "Kilter Board/2.6.5 (android; Android 14; Scale/2.0)")
                 .build();
         HttpResponse<String> response;
         try{
@@ -130,12 +135,13 @@ public class KilterApi {
      * <br> If the user is not found or there was an error, {@code null} is returned.
      */
     public User getUserById(String id){
+        String cookieHeader = this.sessionCookie + "; token=" + this.token;
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(baseUrl + "/users/"+id))
                 .GET()
-                .header("Cookie", "PHPSESSID=v328j3dchjemljsh4ns339fubq")
-                .header("Cookie", "token="+token)
+                .header("Cookie", cookieHeader)
                 .header("Content-Type", "application/json")
+                .header("User-Agent", "Kilter Board/2.6.5 (android; Android 14; Scale/2.0)")
                 .build();
         HttpResponse<String> response;
         try{
@@ -165,13 +171,14 @@ public class KilterApi {
      * @return a Logbook object. <br> If the user is not found or there was an error, {@code null} is returned.
      */
     public Logbook getLogBook(String id){
+        String cookieHeader = this.sessionCookie + "; token=" + this.token;
         for (int i = 0; i < 5; i++) {
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(baseUrl + "/users/"+id+"/logbook?types=ascent,bid"))
+                    .uri(URI.create(baseUrl + "/users/"+id+"/logbook?types=ascent"))
                     .GET()
-                    .header("Cookie", "PHPSESSID=8fql4sa3tmi6nmu4uviuj5eesl")
-                    .header("Cookie", "token="+token)
+                    .header("Cookie", cookieHeader)
                     .header("Content-Type", "application/json")
+                    .header("User-Agent", "Kilter Board/2.6.5 (android; Android 14; Scale/2.0)")
                     .build();
             HttpResponse<String> response;
             try{
@@ -198,12 +205,13 @@ public class KilterApi {
      * @return A list containing the friends, an empty list if the user doesn't have friends and {@code null} if there was an error.
      */
     public List<String> getFriends(String id){
+        String cookieHeader = this.sessionCookie + "; token=" + this.token;
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(baseUrl + "/users/"+id+"/followees"))
                 .GET()
-                .header("Cookie", "PHPSESSID=v328j3dchjemljsh4ns339fubq")
-                .header("Cookie", "token="+token)
+                .header("Cookie", cookieHeader)
                 .header("Content-Type", "application/json")
+                .header("User-Agent", "Kilter Board/2.6.5 (android; Android 14; Scale/2.0)")
                 .build();
         HttpResponse<String> response;
         try{
@@ -230,10 +238,11 @@ public class KilterApi {
      * Log out, token is invalidated.
      */
     public void logOut(){
+        String cookieHeader = this.sessionCookie + "; token=" + this.token;
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://kilterboardapp.com/sessions/delete"))
-                .header("Cookie", "PHPSESSID=v328j3dchjemljsh4ns339fubq")
-                .header("Authorization", "Bearer " + token)
+                .header("Cookie", cookieHeader)
+                .header("User-Agent", "Kilter Board/2.6.5 (android; Android 14; Scale/2.0)")
                 .POST(HttpRequest.BodyPublishers.ofString(
                 "{"
                         + "\"ua\": \"app\", "
