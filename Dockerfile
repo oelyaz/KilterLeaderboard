@@ -12,4 +12,4 @@ COPY --from=builder /app/backend/target/*.jar app.jar
 
 # Expose port and run
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java", "-Djava.net.preferIPv4Stack=true", "-jar", "app.jar"]

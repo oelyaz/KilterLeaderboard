@@ -17,6 +17,7 @@ import java.time.LocalDateTime;
 public class KlieterboardApplication {
 
     public static void main(String[] args) {
+        System.out.println("Starting Klieterboard - User-Agent App");
         ConfigurableApplicationContext ac = SpringApplication.run(KlieterboardApplication.class, args);
         Logbook.setSeasonStart(LocalDateTime.of(2025, 1, 1, 0, 0, 0));
 //        KilterApi ka = ac.getBean(KilterApi.class);
