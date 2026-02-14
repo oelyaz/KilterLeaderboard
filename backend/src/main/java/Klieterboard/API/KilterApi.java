@@ -71,6 +71,7 @@ public class KilterApi {
         } catch (JSONException e) {
             System.out.println("token not available, JSON Exception "+e);
         }
+        System.out.println("New Cookies:" + this.sessionCookie + "; token=" + this.token);
     }
     
     /**
