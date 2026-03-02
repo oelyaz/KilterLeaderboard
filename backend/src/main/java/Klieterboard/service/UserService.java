@@ -19,12 +19,14 @@ public class UserService {
     private final IUserRepository userRepository;
     private final IFriendsRepository friendsRepository;
     private final KilterApi kilterApi;
+    private final WinnerService winnerService;
 
     @Autowired
-    public UserService(IUserRepository userRepository, IFriendsRepository friendsRepository, KilterApi kilterApi) {
+    public UserService(IUserRepository userRepository, IFriendsRepository friendsRepository, KilterApi kilterApi, WinnerService winnerService) {
         this.userRepository = userRepository;
         this.friendsRepository = friendsRepository;
         this.kilterApi = kilterApi;
+        this.winnerService = winnerService;
         kilterApi.determineToken();
     }
 
@@ -192,6 +194,14 @@ public class UserService {
         }
     }
 
+    /**
+     * Finds the username(s) with the highest score. Multiple if tied.
+     * @return the username(s) in a List
+     */
+    public List<User> findUserWithMaxScore(){
+       return userRepository.findUserWithMaxScore();
+    }
+
 
     /**
      * Launches a new season every january 1st and july 1st. <br>
@@ -199,14 +209,29 @@ public class UserService {
      */
     @Scheduled(cron = "0 0 0 1 1,7 ?")
     public void newSeason() {
+        List<User> winners = findUserWithMaxScore();
+        int winner_season_year;
+        int winner_season_semester;
         int year = LocalDateTime.now().getYear();
         if (LocalDateTime.now().getMonth().equals(Month.JANUARY)) {
             Logbook.setSeasonStart(LocalDateTime.of(year, 1, 1, 0, 0, 0));
+            winner_season_year = year - 1;
+            winner_season_semester = 2;
         } else if (LocalDateTime.now().getMonth().equals(Month.JULY)) {
             Logbook.setSeasonStart(LocalDateTime.of(year, 7, 1, 0, 0, 0));
+            winner_season_year = year;
+            winner_season_semester = 1;
         } else {
             System.out.println("Scheduler made a mistake");
             return;
+        }
+        for (User u : winners) {
+            Winner w = new Winner();
+            w.setSeason_year(winner_season_year);
+            w.setSeason_semester(winner_season_semester);
+            w.setUsername(u.getUsername());
+            w.setScore(u.getScore());
+            winnerService.insertWinner(w);
         }
         for (User user : findAll()) {
             Logbook logbook = kilterApi.getLogBook(user.getKilterId());
