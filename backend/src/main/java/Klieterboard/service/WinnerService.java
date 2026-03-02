@@ -1,10 +1,11 @@
 package Klieterboard.service;
 
-import Klieterboard.entity.Friends;
 import Klieterboard.entity.Winner;
 import Klieterboard.repository.IWinnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class WinnerService {
@@ -14,6 +15,15 @@ public class WinnerService {
     @Autowired
     public WinnerService(IWinnerRepository winnerRepository) {
         this.winnerRepository = winnerRepository;
+    }
+
+    /**
+     * Returns a List of all winners saved in the database
+     *
+     * @return a List of all winners
+     */
+    public List<Winner> findAll() {
+        return winnerRepository.findAll();
     }
 
     /**
