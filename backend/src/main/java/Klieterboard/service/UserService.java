@@ -172,6 +172,12 @@ public class UserService {
      */
     public User updateScore(User user) {
         Logbook logbook = kilterApi.getLogBook(user.getKilterId());
+        if(logbook == null) {
+            return user;
+        }
+        if (user.getGrade() == -1) {
+            user.setGrade(logbook.getAverageTopDifficulty(5, 10));
+        }
         user.setScore(logbook.determineScore(user.getGrade()));
         userRepository.save(user);
         return user;
