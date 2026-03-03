@@ -13,6 +13,7 @@
 
 <Navbar />
 
-<div class = "winner"> <h2 class = "input-title" > Last season's winner </h2></div>
-
-<WinnerBoard />
+<div class = "winner">
+    <h2 class = "input-title" > Last season's winner </h2>
+    <WinnerBoard />
+</div>
