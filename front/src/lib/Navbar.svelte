@@ -9,6 +9,11 @@
         goto("/register")
     }
 
+    function navigate_winner() {
+        goto("/winner")
+    }
+
+
     let logoSrc = '/logo.png'; // Path to the logo in the static folder
 </script>
 
@@ -20,6 +25,9 @@
     <div class="buttons">
         <button on:click={navigate_leaderboard}>
             <img src="/medal.svg" alt="Leaderboard">
+        </button>
+        <button on:click={navigate_winner}>
+            <img src="/trophy.svg" alt="Winner">
         </button>
         <button on:click={navigate_register}>
             <img src="/circle-plus.svg" alt="Register">
