@@ -11,6 +11,7 @@
     };
 
     let winnerBoard : Winner [] = [];
+    let loading: boolean = true;
 
 
     async function fetchWinnerBoard() {
@@ -31,7 +32,7 @@
             }
             return b.season_year - a.season_year;
         })
-
+        loading = false;
 
 
     }
@@ -39,6 +40,9 @@
 </script>
 
 <div>
+    {#if loading}
+        <h4>Loading...</h4>
+    {:else}
     <table>
         <thead>
             <tr>
@@ -60,7 +64,7 @@
 
     </table>
 
-
+    {/if}
 </div>
 <style>
     h4 {
