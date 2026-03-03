@@ -1,0 +1,49 @@
+.winner {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: 12em;
+}
+.winner .input-title {
+    font-size: 2em;
+    text-align: center;
+    color: #aec07c;
+}
+
+table {
+    max-width: 40em;
+    margin: 1em auto;
+    border-collapse: collapse;
+    align-content: center;
+    background-color: #282828;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 10px rgba(7, 5, 5, 0.55);
+    color: #ebdbb2;
+}
+
+@media (max-width: 1100px) {
+    table {
+        margin: 1em auto;
+    }
+}
+
+thead {
+    background-color: #282828 !important;
+}
+
+th, td {
+    border: 1px solid #1d2021 !important;
+    width: max-content;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #1d2021 !important;
+    color: #aec07c;
+}
+
+td {
+    background-color: #3c3836;
+}
