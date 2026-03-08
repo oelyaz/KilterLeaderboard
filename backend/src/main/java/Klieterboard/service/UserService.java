@@ -175,7 +175,7 @@ public class UserService {
         if(logbook == null) {
             return user;
         }
-        if (user.getGrade() == -1) {
+        if (user.getGrade() == -1 || user.getGrade() == 0) {
             user.setGrade(logbook.getAverageTopDifficulty(5, 10));
         }
         user.setScore(logbook.determineScore(user.getGrade()));
